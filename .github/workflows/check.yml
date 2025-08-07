@@ -1,0 +1,24 @@
+name: Lua Language Server Analysis
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with: {submodules: recursive}
+
+      - name: Download and extract Lua Language Server
+        run: |
+          mkdir -p lua-ls
+          curl -L https://github.com/LuaLS/lua-language-server/releases/download/3.15.0/lua-language-server-3.15.0-linux-x64.tar.gz | tar xz -C lua-ls
+          chmod +x lua-ls/bin/lua-language-server
+
+      - name: Run Lua Language Server
+        run: lua-ls/bin/lua-language-server --check .
