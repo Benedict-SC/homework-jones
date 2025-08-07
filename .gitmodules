@@ -1,3 +1,4 @@
 [submodule "Kristal"]
-	path = Kristal
+	path = 3rd/Kristal
 	url = https://github.com/KristalTeam/Kristal
+	shallow = true
