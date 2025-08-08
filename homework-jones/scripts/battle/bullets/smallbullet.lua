@@ -1,5 +1,9 @@
 local SmallBullet, super = Class(Bullet)
 
+---@param x      number
+---@param y      number
+---@param dir    number
+---@param speed  number
 function SmallBullet:init(x, y, dir, speed)
     -- Last argument = sprite path
     super.init(self, x, y, "bullets/smallbullet")

@@ -34,9 +34,9 @@ jobs:
               for (const {range, ...error} of errors) {
                 const errorLevel = ({1: "error", 2: "warning"})[error.severity] || 'notice'
                 core[errorLevel](
-                  error.message + "\n" + error.code,
+                  `${error.message}\n(error.code)`,
                   {
-                    file: filePath.replace(`file://${process.cwd()}`, ''),
+                    file: filePath.replace(`file://${process.cwd()}/`, ''),
                     startLine: range.start.line + 1,
                     endLine: range.end.line + 1,
                     startColumn: range.start.character + 1,

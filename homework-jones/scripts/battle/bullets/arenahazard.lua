@@ -1,5 +1,8 @@
 local ArenaHazard, super = Class(Bullet)
 
+---@param x      number
+---@param y      number
+---@param rot    number
 function ArenaHazard:init(x, y, rot)
     -- Last argument = sprite path
     super.init(self, x, y, "bullets/arenahazard")
