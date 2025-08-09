@@ -2,40 +2,35 @@ local HJones, super = Class(EnemyBattler)
 
 function HJones:init()
     super.init(self)
-
-    -- Enemy name
     self.name = "Homework Jones"
+
     -- Sets the actor, which handles the enemy's sprites (see scripts/data/actors/dummy.lua)
     self:setActor("homework")
 
-    -- Enemy health
     self.max_health = 4000
     self.health = 4000
-    -- Enemy attack (determines bullet damage)
     self.attack = 9
-    -- Enemy defense (usually 0)
     self.defense = 0
-    -- Enemy reward
     self.money = 100
-
-    -- Mercy given when sparing this enemy before its spareable (20% for basic enemies)
-    self.spare_points = 20
 
     -- List of possible wave ids, randomly picked each turn
     self.waves = {
         "essay",
+        "aiming",
     }
 
     -- Dialogue randomly displayed in the enemy's speech bubble
     self.dialogue = {
         "Kya ha ha!",
         "I'm Homework Jones!",
-        "Solve my puzzles\nand problems!",
-        "I before E except in\na lot of situations!"
+        "Solve my puzzles and problems!",
+        "I before E except in a lot of situations!"
     }
 
     -- Check text (automatically has "ENEMY NAME - " at the start)
-    self.check = "AT 9 DF 0\n* Miss Alphys has created a\n* monster. I mean Darkner."
+    self.check = "AT 9 DF 0\n"..
+        "* Miss Alphys has created a\n"..
+        "* monster. I mean Darkner."
 
     -- Text randomly displayed at the bottom of the screen each turn
     self.normalText = {

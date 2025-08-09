@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  // "workspace.ignoreSubmodules": false,
+  // "workspace.checkThirdParty": true,
+  // "workspace.userThirdParty": ["love2d"],
+  "Lua.runtime.version" : "LuaJIT",
+  "Lua.runtime.special" : {
+      "love.filesystem.load" : "loadfile",
+      "modRequire": "require"
+  },
+  "workspace.library": [
+    "${3rd}/love2d/library",
+    "3rd/Kristal"
+  ]
+}
