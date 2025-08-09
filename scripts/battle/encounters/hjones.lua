@@ -7,7 +7,7 @@ function HJones:init()
     self.text = "* Solve my puzzles and problems!"
 
     -- Battle music ("battle" is rude buster)
-    self.music = "battle"
+    self.music = "studysession"
     -- Enables the purple grid battle background
     self.background = true
 

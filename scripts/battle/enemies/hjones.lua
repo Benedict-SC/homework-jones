@@ -38,39 +38,60 @@ function HJones:init()
     self.check = "AT 9 DF 0\n* Miss Alphys has created a\n* monster. I mean Darkner."
 
     -- Text randomly displayed at the bottom of the screen each turn
-    self.text = {
-        "* Homework Jones assigns you\nthree to four hours\nof mandatory fun.",
-        "* Homework Jones wants to \nknow how your college\napplications are going.",
-        "* Homework Jones is attempting\nto make economics 'Kool.'",
-        "* Homework Jones is teaching\nyou a mnemonic that\ndoesn't stand for anything.",
-        "* Looking at Homework Jones,\nyou remembered what\na mitochondria was.",
+    self.normalText = {
+        "* Homework Jones assigns you three to four hours of mandatory fun.",
+        "* Homework Jones asks how your college applications are going.",
+        "* Homework Jones says, \"Kya ha ha!\"",
+        "* Homework Jones spins at random speeds.",
+        "* Homework Jones makes economic theory 'Kool.'",
+        "* Homework Jones teaches you a mnemonic for... something.",
+        "* Looking at Homework Jones, you remembered what a mitochondria was.",
+        "* Homework Jones can't decide between puzzles and problems.",
         "* Normal to want.\nPossible to achieve.",
     }
+    self.ouchieText = {
+        "* Your tooth marks look like angry eyebrows.",
+        "* Homework Jones drafts a letter to the PTA.",
+        "* Homework Jones leaves a slug trail when he spins.",
+        "* Homework Jones says, \"Keh huh huh...\"",
+        "* Homework Jones spits out a spitball that used to be a tooth.",
+        "* Homework Jones writes your name on the board and circles it.",
+        "* Homework Jones looks like an origami dog toy.",
+    }
+    self.mercyText = { "* Homework Jones reminds you to sign your name on his face." }
+    self.pacifyText = { "* Sludge Puddle Jones wants to nap in the teacher's lounge." }
+    self.text = self.normalText;
     -- Text displayed at the bottom of the screen when the enemy has low health
-    self.low_health_text = "* Homework Jones tries to\nprove there's an afterlife\nwith basic algebra."
+    self.low_health_text = "* Shred Jones isn't as cool as his name sounds."
 
-    -- Register act called "Smile"
+    self.chewed = 0;
+
     self:registerAct("EatHW")
-    -- Register party act with Ralsei called "Tell Story"
-    -- (second argument is description, usually empty)
     self:registerAct("EatHWX","",{"susie"})
+    self:registerAct("Solve")
     self:registerAct("SolveForX", "", {"ralsei"})
 end
 
 function HJones:onAct(battler, name)
     if name == "EatHW" then
-        self:hurt(100,Game.battle:getPartyBattler("kris"))
-        -- Change this enemy's dialogue for 1 turn
-        self.dialogue_override = "... ^^"
-        -- Act text (since it's a list, multiple textboxes)
-        return {
-            "* You smile.[wait:5]\n* The dummy smiles back.",
-            "* It seems the dummy just wanted\nto see you happy."
-        }
+        if self.chewed == 0 then
+            self.chewed = 2
+            Game.battle:startActCutscene("firstchew", "firstChew",false,self)
+            return
+        else
+            self.chewed = self.chewed + 2;
+            Assets.playSound("impact")
+            self:shake(4);
+
+            return {
+            "* You devoured more of the Fruits of Knowledge.",
+            "* Homework Jones got even less readable."
+            }
+        end
 
     elseif name == "SolveForX" then
         -- Loop through all enemies
-        Game.battle:startActCutscene("favoritefriend", "favoriteFriend",self)
+        Game.battle:startActCutscene("favoritefriend", "favoriteFriend",false,self)
 
     elseif name == "Standard" then --X-Action
         -- Give the enemy 50% mercy
