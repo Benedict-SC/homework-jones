@@ -6,7 +6,22 @@ return {
     favoriteFriend = function(cutscene, enemy,dialogue)
         cutscene:text("")
         for i=1,#dialogue do
-            cutscene:battlerText({enemy},dialogue[i]);
+            local line = dialogue[i];
+            if type(line) == "string" then
+                cutscene:battlerText({enemy},line);
+            elseif type(line) == "table" then
+                if line.who then
+                    cutscene:setSpeaker(line.who);
+                    cutscene:text(line.what,line.face);
+                elseif line.react then
+                    cutscene:battlerText({enemy},line.what,{wait=false});
+                    cutscene:text("[react:1]",nil,{reactions= { {
+                        line.react,line.rx,line.ry,line.reactface,line.reactwho
+                    }}});
+                elseif line.what then
+                    cutscene:text(line.what);
+                end
+            end
         end
     end
 }

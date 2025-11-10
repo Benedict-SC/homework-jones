@@ -16,7 +16,6 @@ function HJones:init()
     -- List of possible wave ids, randomly picked each turn
     self.waves = {
         "essay",
-        "aiming",
     }
 
     -- Dialogue randomly displayed in the enemy's speech bubble
@@ -24,13 +23,13 @@ function HJones:init()
         "Kya ha ha!",
         "I'm Homework Jones!",
         "Solve my puzzles and problems!",
-        "I before E except in a lot of situations!"
+        "I before E except in\na lot of situations!"
     }
 
     -- Check text (automatically has "ENEMY NAME - " at the start)
     self.check = "AT 9 DF 0\n"..
         "* Miss Alphys has created a\n"..
-        "* monster. I mean Darkner."
+        "monster. I mean Darkner."
 
     -- Text randomly displayed at the bottom of the screen each turn
     self.normalText = {
