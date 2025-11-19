@@ -15,7 +15,7 @@ function HJones:init()
 
     -- List of possible wave ids, randomly picked each turn
     self.waves = {
-        "essay",
+        "multiplechoice",
     }
 
     -- Dialogue randomly displayed in the enemy's speech bubble
@@ -59,6 +59,7 @@ function HJones:init()
     self.low_health_text = "* Shred Jones isn't as cool as his name sounds."
 
     self.chewed = 0;
+    self.multIndex = 1;
 
     self:registerAct("EatHW")
     self:registerAct("EatHWX","",{"susie"})
