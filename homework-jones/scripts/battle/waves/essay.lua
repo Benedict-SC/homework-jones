@@ -5,6 +5,14 @@ function Essay:onStart()
     self.testtext = "this is a bunch of text that we're going to attempt to write out into the textbox"
     self.testprog = 1;
     self.input = {""}
+    self:setArenaSize(30,30);
+    --self:setSoulPosition(SCREEN_WIDTH / 2,250);
+    --self:setArenaOffset(0,80);
+    self:moveArena();
+    self.questionText = Text("Essay question 1:\nWho is your favorite friend?",200,100,250,nil,{align="center"});
+    Game.battle:addChild(self.questionText);
+    self.instructionText = Text("Type your answer\n[wave]vv[wave:0]   with the keyboard!   [wave]vv[wave:0]",-100,285,nil,nil,{color={0.5,0.5,0.5},align="center",font_size=18});
+    Game.battle:addChild(self.instructionText);
     TextInput.attachInput(self.input,{
         enter_submits = false,
         multiline = false,
@@ -15,6 +23,14 @@ function Essay:onStart()
         self.testprog = self.testprog + 1;
         Game.battle.battle_ui.encounter_text.text:setText("[instant]" .. string.sub(self.testtext,1,self.testprog));
     end)]]
+end
+
+function Essay:moveArena()
+    self.timer:approach(0.2,Game.battle.arena.y,Game.battle.arena.y + 80,function(num) 
+        local dist = num - Game.battle.arena.y;
+        Game.battle.arena.y = num;
+        Game.battle.soul.y = Game.battle.soul.y + dist;
+    end);
 end
 
 function Essay:update()
@@ -239,6 +255,8 @@ end
 function Essay:onEnd()
    TextInput.endInput(); 
    local dialogue = self:getFriendDialogue();
+   self.questionText:remove();
+   self.instructionText:remove();
    Game.battle:startCutscene("favoritefriend", "favoriteFriend",self:getAttackers()[1],dialogue);
 end
 

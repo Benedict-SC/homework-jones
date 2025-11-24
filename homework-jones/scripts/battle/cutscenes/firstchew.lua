@@ -9,6 +9,7 @@ return {
         cutscene:text("* ...and bit down on it like a paper burrito.");
         Assets.playSound("impact")
         enemy:shake(4);
+        enemy.chewed = enemy.chewed + 10;
         cutscene:battlerText({enemy},"KYA???",{wait=false});
         cutscene:text("[react:1][react:2]",nil,{reactions= { {
             "KRIS???",80,5,"surprise_confused","ralsei"

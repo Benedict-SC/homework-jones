@@ -2,19 +2,86 @@ local MultipleChoice, super = Class(Wave)
 
 MultipleChoice.questions = {
     {
-        question="Test question is testing you",
-        a="Right answer",
-        b="Wrong but very long answer with words",
-        c="Wronger answer",
-        d="Wrongest answer",
-        wrongs={"b","c","d"}
+        question="How much for a Rhapsotea from the Old Man?",
+        a="D$99",
+        b="D$199",
+        c="D$100",
+        d="$99",
+        wrongs={"b","c","d"},
+        answerSize=28,
+        rowOffsets={20,0}
     },{
-        question="Test question 2\n    is here!",
-        a="Wronger answer",
-        b="Wrong answer",
-        c="Right answer",
-        d="Wrongest answer",
-        wrongs={"a","b","d"}
+        question="Complete the lyric: \"When your hope is slowly dying / ?\"",
+        a="And your future's lost in night",
+        b="And your future's cost your rights",
+        c="And your future's lost its rights",
+        d="And its fur is soft and white",
+        wrongs={"a","b","d"},
+        answerSize=20,
+        rowOffsets={10,0}
+    },{
+        question="Which one has Elnina never dated?",
+        a="Rouxls",
+        b="Miss Mizzle",
+        c="Lanino",
+        d="Star walker",
+        wrongs={"a","c","d"},
+        answerSize=28,
+        rowOffsets={20,0}
+    },{
+        question="What subject does Clover NOT like talking about?",
+        a="Boys",
+        b="Sports",
+        c="Trees",
+        d="GunControl",
+        wrongs={"a","b","c"},
+        answerSize=28,
+        rowOffsets={20,0}
+    },{
+        question="What is your group project about?",
+        a="",
+        b="",
+        c="",
+        d="",
+        wrongs={},
+        answerSize=20,
+        rowOffsets={20,0}
+    },{
+        question="Who does Miss Alphys leave milk out for?",
+        a="Cat",
+        b="Susie",
+        c="Catty",
+        d="\"The Milk Freak\"",
+        wrongs={"b","c","d"},
+        answerSize=28,
+        rowOffsets={20,0}
+    },{
+        question="Which Hometown schoolteacher is best at their job?",
+        a="Gerson Boom",
+        b="Toriel",
+        c="Alphys",
+        d="Literally anyone else",
+        wrongs={"c"},
+        answerSize=24,
+        rowOffsets={20,0}
+    },{
+        question="Does Undyne like Miss Alphys?",
+        a="Yes, they're dating",
+        b="No, she doesn't really care",
+        c="No, she doesn't know her name",
+        d="Yes, they're friends",
+        wrongs={"a","c","d"},
+        answerSize=22,
+        rowOffsets={20,0}
+    },{
+        question="What feature is Susie proudest of?",
+        a="Her teeth",
+        b="Her hair",
+        c="Her muscles",
+        d="Her eyes",
+        wrongs={"a","c","d"},
+        answerSize=28,
+        rowOffsets={20,0}
     }
 }
 function MultipleChoice:init()
@@ -26,7 +93,22 @@ function MultipleChoice:onStart()
     self.readtime = 6;
     self.UI_DISPLACE = 110;
     local attacker = self:getAttackers()[1];
-    self.q = MultipleChoice.questions[attacker.multIndex];
+    attacker.current_target = "ALL";
+    if attacker.multIndex > #MultipleChoice.questions then
+        self.q = {
+            question="Have I run out of new multiple choice questions?",
+            a="Yes",
+            b="Not yet",
+            c="No",
+            d="Never",
+            wrongs={"b","c","d"},
+            answerSize=28,
+            rowOffsets={20,0}
+        }
+    else
+        self.q = MultipleChoice.questions[attacker.multIndex];
+        attacker.multIndex = attacker.multIndex + 1;
+    end
     self.shotCount = #self.q.wrongs;
 
     self.bg = Sprite("bullets/scantron", 212, 71)
@@ -39,11 +121,11 @@ function MultipleChoice:onStart()
     self.instructionText = Text("Bubble in the\ncorrect answer!",420,180,nil,nil,{color={0.5,0.5,0.5}});
     Game.battle:addChild(self.instructionText);
 
-    self.questionText = Text(self.q.question,210,330,220,nil,{color={1,1,1},align="center"});
-    self.aLabel = Text("A. " .. self.q.a,20,300,180,nil,{font_size=24,align="center"});
-    self.bLabel = Text("B. " .. self.q.b,440,300,180,nil,{font_size=24,align="center"});
-    self.cLabel = Text("C. " .. self.q.c,20,380,180,nil,{font_size=24,align="center"});
-    self.dLabel = Text("D. " .. self.q.d,440,380,180,nil,{font_size=24,align="center"});
+    self.questionText = Text(self.q.question,210,300,220,nil,{color={1,1,1},align="center"});
+    self.aLabel = Text("A. " .. self.q.a,20,300 + self.q.rowOffsets[1],180,nil,{font_size=self.q.answerSize,align="center"});
+    self.bLabel = Text("B. " .. self.q.b,440,300 + self.q.rowOffsets[1],180,nil,{font_size=self.q.answerSize,align="center"});
+    self.cLabel = Text("C. " .. self.q.c,20,380 + self.q.rowOffsets[2],180,nil,{font_size=self.q.answerSize,align="center"});
+    self.dLabel = Text("D. " .. self.q.d,440,380 + self.q.rowOffsets[2],180,nil,{font_size=self.q.answerSize,align="center"});
     Game.battle:addChild(self.questionText)
     Game.battle:addChild(self.aLabel)
     Game.battle:addChild(self.bLabel)
@@ -64,7 +146,7 @@ function MultipleChoice:onStart()
 end
 
 function MultipleChoice:update()
-    if (Game.battle.wave_timer > self.readtime) and not self.fired and self.shotCount > 0 then
+    if (Game.battle.wave_timer > self.readtime) and not self.fired then
         self:fire();
         self.fired = true;
     end
@@ -93,9 +175,9 @@ function MultipleChoice:arrive()
             self.boatbg.alpha = num;
         end,"in-cubic",function() 
             self.boatbg.alpha = 1; 
-            self.timerFrame = Rectangle(236,294,167,10);
+            self.timerFrame = Rectangle(236,293,167,10);
             self.timerFrame:setColor(1,1,1);
-            self.timerExpended = Rectangle(401,295,1,8);
+            self.timerExpended = Rectangle(401,294,1,8);
             self.timerExpended:setColor(0,0,0)
             Game.battle:addChild(self.timerFrame);
             Game.battle:addChild(self.timerExpended);
@@ -109,6 +191,22 @@ function MultipleChoice:arrive()
             self.timer:after(3.3,function()
                 self.instructionText:setText("[shake:1]Bubble in the\ncorrect answer!");
             end);
+            if self.shotCount == 0 then
+                self.timer:after(1.5,function() 
+                    self.umBubble = SpeechBubble("Umm[wait:10].[wait:10].[wait:10].[wait:10].",350, 70, {right=true}, self.boat);
+                    Game.battle:addChild(self.umBubble);
+                    self.timer:after(2.5,function()
+                        self.umBubble:remove();
+                        self.timer:after(1,function() 
+                            self.nevermind = SpeechBubble("Actually,[wait:5]\nnever mind.",350, 68, {right=true}, self.boat);
+                            Game.battle:addChild(self.nevermind);
+                            self.timer:after(2.5,function()
+                                self.nevermind:remove();
+                            end);
+                        end);
+                    end);
+                end);
+            end
         end);
 end
 function MultipleChoice:fire()
@@ -117,19 +215,21 @@ function MultipleChoice:fire()
         self.timer:approach(1.4,1,0,function(num)
             self.instructionText.alpha = num;
         end,"linear");
-        Assets.playSound("bomb");
-        self:bombUp(self.q.wrongs[1],302,88);
-        if self.shotCount > 1 then
-            self.timer:after(0.1,function() 
-                Assets.playSound("bomb"); 
-                self:bombUp(self.q.wrongs[2],320,90);
-                if(self.shotCount > 2) then
-                    self.timer:after(0.1,function() 
+        if self.shotCount > 0 then
+            Assets.playSound("bomb");
+            self:bombUp(self.q.wrongs[1],302,88);
+            if self.shotCount > 1 then
+                self.timer:after(0.1,function() 
                     Assets.playSound("bomb"); 
-                    self:bombUp(self.q.wrongs[3],337,92);
-                    end);
-                end
-            end);
+                    self:bombUp(self.q.wrongs[2],320,90);
+                    if(self.shotCount > 2) then
+                        self.timer:after(0.1,function() 
+                        Assets.playSound("bomb"); 
+                        self:bombUp(self.q.wrongs[3],337,92);
+                        end);
+                    end
+                end);
+            end
         end
         self.timer:approach(0.3,20,25,function(num)
             self.boat.y = num;
@@ -143,6 +243,9 @@ function MultipleChoice:fire()
                 for i=1,#self.q.wrongs,1 do
                     self:bombDown(self.q.wrongs[i]);
                 end
+                self.timer:after(0.5,function()
+                    Assets.playSound("badexplosion");
+                end);
             else --TODO: this is the one with no wrong answers and there's special stuff.
 
             end
@@ -175,14 +278,13 @@ function MultipleChoice:sailAway()
 end
 function MultipleChoice:bombDown(letter)
     local bomb = self.bombs[letter];
-    --error(Utils.dump(self.bombs));
     bomb:setScale(1,1);
     bomb:setLayer(BATTLE_LAYERS["bullets"])
     local startX = 0;
     local startY = 0;
     local fall = 266;
     if letter == "a" then
-        startX = 71;
+        startX = 271;
         startY = -106;
     elseif letter == "b" then
         startX = 342;
@@ -200,7 +302,37 @@ function MultipleChoice:bombDown(letter)
         bomb.y = num;
     end,"linear",function()
         bomb:remove();
+        self:explode(letter);
     end);
+end
+function MultipleChoice:explode(letter)
+    local ex = 0;
+    local ey = 0;
+    if letter == "a" then
+        ex = 284;
+        ey = 175;
+    elseif letter == "b" then
+        ex = 356;
+        ey = 175;
+    elseif letter == "c" then
+        ex = 284;
+        ey = 247;
+    else -- letter == "d" then
+        ex = 356;
+        ey = 247;
+    end
+    local bullet = self:spawnBullet("cannonblast",ex,ey);
+    bullet:setScale(0.1,0.1);
+    self.timer:approach(0.2,0.1,1,function(num)
+        bullet:setScale(num);
+    end,"out-quint",function()
+        self.timer:after(0.3,function()
+            self.timer:approach(1,1,0,function(num) 
+                bullet.alpha = num;
+            end);
+            bullet.collider = nil;
+        end)
+    end)
 end
 function MultipleChoice:cleanupStep()
         self.instructionText:remove();

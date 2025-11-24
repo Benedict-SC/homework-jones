@@ -9,7 +9,7 @@ function HJones:init()
 
     self.max_health = 4000
     self.health = 4000
-    self.attack = 9
+    self.attack = 11
     self.defense = 0
     self.money = 100
 
@@ -22,28 +22,30 @@ function HJones:init()
     self.dialogue = {
         "Kya ha ha!",
         "I'm Homework Jones!",
-        "Solve my puzzles and problems!",
+        "Solve my puzzles\nand problems!",
         "I before E except in\na lot of situations!"
     }
 
     -- Check text (automatically has "ENEMY NAME - " at the start)
-    self.check = "AT 9 DF 0\n"..
+    self.check = "AT 11 DF 0\n"..
         "* Miss Alphys has created a\n"..
         "monster. I mean Darkner."
 
     -- Text randomly displayed at the bottom of the screen each turn
     self.normalText = {
         "* Homework Jones assigns you three to four hours of mandatory fun.",
-        "* Homework Jones asks how your college applications are going.",
+        "* Homework Jones asks how your\ncollege applications are going.",
         "* Homework Jones says, \"Kya ha ha!\"",
         "* Homework Jones spins at random speeds.",
-        "* Homework Jones makes economic theory 'Kool.'",
+        "* Homework Jones makes economic\ntheory 'Kool.'",
         "* Homework Jones teaches you a mnemonic for... something.",
         "* Looking at Homework Jones, you remembered what a mitochondria was.",
         "* Homework Jones can't decide between puzzles and problems.",
         "* Normal to want.\nPossible to achieve.",
+        "* Homework just got a little more Jones.",
     }
     self.ouchieText = {
+        "* Whatever happened to Homework Jones? ...You. You did.",
         "* Your tooth marks look like angry eyebrows.",
         "* Homework Jones drafts a letter to the PTA.",
         "* Homework Jones leaves a slug trail when he spins.",
@@ -60,6 +62,9 @@ function HJones:init()
 
     self.chewed = 0;
     self.multIndex = 1;
+    self.wordProblemsGiven = 0;
+    self.solveForXPicked = false;
+    self.soggySolvePicked = false;
 
     self:registerAct("EatHW")
     self:registerAct("EatHWX","",{"susie"})
@@ -83,11 +88,10 @@ function HJones:onAct(battler, name)
             "* Homework Jones got even less readable."
             }
         end
-
+    elseif name == "Solve" then
+        Game.battle:startActCutscene("solve","solve",false,self);
     elseif name == "SolveForX" then
-        -- Loop through all enemies
-        Game.battle:startActCutscene("favoritefriend", "favoriteFriend",false,self)
-
+        Game.battle:startActCutscene("solveforx","solveforx",false,self);
     elseif name == "Standard" then --X-Action
         -- Give the enemy 50% mercy
         self:addMercy(50)
