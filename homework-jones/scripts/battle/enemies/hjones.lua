@@ -75,7 +75,6 @@ end
 function HJones:onAct(battler, name)
     if name == "EatHW" then
         if self.chewed == 0 then
-            self.chewed = 2
             Game.battle:startActCutscene("firstchew", "firstChew",false,self)
             return
         else
@@ -85,6 +84,21 @@ function HJones:onAct(battler, name)
 
             return {
             "* You devoured more of the Fruits of Knowledge.",
+            "* Homework Jones got even less readable."
+            }
+        end
+    elseif name == "EatHWX" then
+        if not self.tagteamed then
+            self.tagteamed = true;
+            Game.battle:startActCutscene("eathwx", "eathwx",false,self)
+            return
+        else
+            self.chewed = self.chewed + 4;
+            Assets.playSound("impact")
+            self:shake(4);
+
+            return {
+            "* You and Susie devoured more of the Fruits of Knowledge.",
             "* Homework Jones got even less readable."
             }
         end

@@ -9,7 +9,7 @@ return {
         cutscene:text("* ...and bit down on it like a paper burrito.");
         Assets.playSound("impact")
         enemy:shake(4);
-        enemy.chewed = enemy.chewed + 10;
+        enemy.chewed = enemy.chewed + 2;
         cutscene:battlerText({enemy},"KYA???",{wait=false});
         cutscene:text("[react:1][react:2]",nil,{reactions= { {
             "KRIS???",80,5,"surprise_confused","ralsei"
@@ -17,8 +17,8 @@ return {
             "Hell yeah, Kris!",300,30,"surprise_smile","susie"
         }}});
         cutscene:text("* Homework Jones got less readable!")
-        cutscene:battlerText({enemy},"Whuh-- that was worth\nsix percent of your grade!");
-        cutscene:battlerText({enemy},"...Kya ha, uh, Kris,\nif you're confused...");
+        cutscene:battlerText({enemy},"Whuh--[wait:5] that was worth\nsix percent of your grade!");
+        cutscene:battlerText({enemy},"...Kya ha,[wait:5] uh,[wait:5] Kris,\nif you're confused...");
         cutscene:battlerText({enemy},"You can always ask\nyour smarter friend?");
         enemy:shake(4);
         cutscene:battlerText({enemy},"SMART friend!\nI mean SMART friend!");

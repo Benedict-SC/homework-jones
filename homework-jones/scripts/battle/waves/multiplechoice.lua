@@ -88,6 +88,35 @@ function MultipleChoice:init()
     super.init(self);
     self:setArenaOffset(0, 40);
 end
+function MultipleChoice:illegibilize(text)
+    local percent = 0;
+    local chewed = self:getAttackers()[1].chewed;
+    local shake = 0;
+    if chewed <= 2 then
+        percent = 0;
+        shake = 0;
+    elseif chewed > 2 and chewed < 10 then
+        percent = 10 + ((chewed - 4)*5);
+        shake = 1;
+    else
+        percent = 50;
+        shake = 2;
+    end
+    local mashed = "";
+    for i=1,#text do
+        local char = text:sub(i,i);
+        local rn = math.random(1,100);
+        if rn < percent then
+            char = " ";
+        end
+        rn = math.random(1,100);
+        if rn < percent then
+            char = "[shake:" .. shake .. "]" .. char .. "[shake:0]";
+        end
+        mashed = mashed .. char;
+    end
+    return mashed;
+end 
 function MultipleChoice:onStart()
     self.time = 10;
     self.readtime = 6;
@@ -121,11 +150,11 @@ function MultipleChoice:onStart()
     self.instructionText = Text("Bubble in the\ncorrect answer!",420,180,nil,nil,{color={0.5,0.5,0.5}});
     Game.battle:addChild(self.instructionText);
 
-    self.questionText = Text(self.q.question,210,300,220,nil,{color={1,1,1},align="center"});
-    self.aLabel = Text("A. " .. self.q.a,20,300 + self.q.rowOffsets[1],180,nil,{font_size=self.q.answerSize,align="center"});
-    self.bLabel = Text("B. " .. self.q.b,440,300 + self.q.rowOffsets[1],180,nil,{font_size=self.q.answerSize,align="center"});
-    self.cLabel = Text("C. " .. self.q.c,20,380 + self.q.rowOffsets[2],180,nil,{font_size=self.q.answerSize,align="center"});
-    self.dLabel = Text("D. " .. self.q.d,440,380 + self.q.rowOffsets[2],180,nil,{font_size=self.q.answerSize,align="center"});
+    self.questionText = Text(self:illegibilize(self.q.question),210,300,220,nil,{color={1,1,1},align="center"});
+    self.aLabel = Text("A. " .. self:illegibilize(self.q.a),20,300 + self.q.rowOffsets[1],180,nil,{font_size=self.q.answerSize,align="center"});
+    self.bLabel = Text("B. " .. self:illegibilize(self.q.b),440,300 + self.q.rowOffsets[1],180,nil,{font_size=self.q.answerSize,align="center"});
+    self.cLabel = Text("C. " .. self:illegibilize(self.q.c),20,380 + self.q.rowOffsets[2],180,nil,{font_size=self.q.answerSize,align="center"});
+    self.dLabel = Text("D. " .. self:illegibilize(self.q.d),440,380 + self.q.rowOffsets[2],180,nil,{font_size=self.q.answerSize,align="center"});
     Game.battle:addChild(self.questionText)
     Game.battle:addChild(self.aLabel)
     Game.battle:addChild(self.bLabel)
