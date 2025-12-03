@@ -2,9 +2,7 @@ local CannonBlast, super = Class(Bullet)
 
 ---@param x      number
 ---@param y      number
----@param dir    number
----@param speed  number
-function CannonBlast:init(x, y, dir, speed)
+function CannonBlast:init(x, y)
     -- Last argument = sprite path
     super.init(self, x, y, "bullets/blast")
     self:setSpikyCollider();

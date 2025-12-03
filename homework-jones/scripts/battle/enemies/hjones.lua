@@ -15,7 +15,8 @@ function HJones:init()
 
     -- List of possible wave ids, randomly picked each turn
     self.waves = {
-        "multiplechoice",
+        "mathblaster",
+        "multiplechoice"
     }
 
     -- Dialogue randomly displayed in the enemy's speech bubble
