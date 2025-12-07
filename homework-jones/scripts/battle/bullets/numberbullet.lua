@@ -9,6 +9,7 @@ function NumberBullet:init(x, y, dir, speed, numCode)
     self.destroy_on_hit = false;    
     self.physics.direction = dir;
     self.physics.speed = speed;
+    self:setScale(1.4);
 end
 
 function NumberBullet:update()
@@ -25,7 +26,7 @@ function NumberBullet:assignColliders(numCode)
         tr=Hitbox(nil,26,0,5,31),
         bl=Hitbox(nil,0,26,5,31),
         br=Hitbox(nil,26,26,5,31),
-        one=Hitbox(nil,13,0,5,37),
+        one=Hitbox(nil,13,0,5,57),
         slash=PolygonCollider(nil,{{27,0},{31,0},{31,5},{5,57},{0,57},{0,54},{27,0}}),
         plusbar=Hitbox(nil,13,13,5,31),
         divtop=Hitbox(nil,13,13,5,5),
