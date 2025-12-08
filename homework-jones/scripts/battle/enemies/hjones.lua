@@ -63,6 +63,7 @@ function HJones:init()
 
     self.chewed = 0;
     self.multIndex = 1;
+    self.mathIndex = 1;
     self.wordProblemsGiven = 0;
     self.solveForXPicked = false;
     self.soggySolvePicked = false;

@@ -1,14 +1,21 @@
 local MathBlaster, super = Class(Wave)
 
 function MathBlaster:onStart()
-    self.time = 12;
+    self.jones = self:getAttackers()[1];
+    self.time = 14;
     self.bulletspeed = 5;
     local equations = {
-        {{"sqrt",5},4,"times",6,"plus",1,{"equals"},answer=5},
-        {{"sqrt",5},7,"minus",3,"div",2,{"equals"},answer=2}
+        {{"sqrt",5},4,"times",6,"plus",1,{"equals"},answers={"5","13","6"},size=1.4,wobbleOffset=0},
+        {7,"minus",8,"div",2,{"equals"},answers={"3","-.5","9"},size=1.7,wobbleOffset=0.1}
     }
-    local eq = equations[math.random(1,#equations)];
+    local eq = equations[self.jones.mathIndex];
+    self.jones.mathIndex = self.jones.mathIndex + 1;
+    if self.jones.mathIndex > #equations then
+        self.jones.mathIndex = 1;
+    end
+    self.eq = eq;
     local symbolIndex = 1;
+    self.answersSpawned = false;
     self.timer:every(0.65,function() 
         if symbolIndex <= #eq then
             --local yDisplace = math.random(30,60);
@@ -21,22 +28,34 @@ function MathBlaster:onStart()
                     bullet.originalY = bullet.y;
                     self:bulletWiggleAdjust(bullet);
                 elseif numcode[1] == "equals" then
-                    local bullet = self:spawnBullet("equalssign",680,198,math.pi,self.bulletspeed);
+                    local bullet = self:spawnBullet("equalssign",680,206,math.pi,self.bulletspeed);
                     bullet.originalY = bullet.y;
                     self:bulletWiggleAdjust(bullet);
                     self.timer:after(1,function() self:slowdown() end);
                 end
             else
-                local bullet = self:spawnBullet("numberbullet",670,180,math.pi,self.bulletspeed,numcode);
+                local bullet = self:spawnBullet("numberbullet",670,180,math.pi,self.bulletspeed,numcode,eq.size);
                 bullet.originalY = bullet.y;
                 self:bulletWiggleAdjust(bullet);
             end
             symbolIndex = symbolIndex + 1;
+        elseif not self.answersSpawned then
+            self.answersSpawned = true;
+            self.timer:after(1.4,function() 
+                local t = {1,2,3};
+                for i = #t, 2, -1 do
+                    local j = math.random(i)
+                    t[i], t[j] = t[j], t[i]
+                end
+                for i=1,#t,1 do
+                    self:spawnBullet("answerorb",700,173,t[i],eq.answers[i],i==1);
+                end
+            end);
         end
     end);
 end
 function MathBlaster:bulletWiggleAdjust(bullet)
-    bullet.y = bullet.originalY + (math.sin(Game.battle.wave_timer * 1.2) * 15);
+    bullet.y = bullet.originalY + (math.sin(Game.battle.wave_timer * 1.2 + self.eq.wobbleOffset) * 15);
 end
 function MathBlaster:slowdown()
     self.timer:approach(0.8,self.bulletspeed,2,function(num)
@@ -48,7 +67,9 @@ end
 
 function MathBlaster:update()
     for i=1,#self.bullets,1 do
-        self:bulletWiggleAdjust(self.bullets[i]);
+        if not self.bullets[i].isAnswer then
+            self:bulletWiggleAdjust(self.bullets[i]);
+        end
     end
     super.update(self)
 end

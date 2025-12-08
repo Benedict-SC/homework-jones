@@ -2,14 +2,14 @@ local NumberBullet, super = Class(Bullet)
 
 ---@param x      number
 ---@param y      number
-function NumberBullet:init(x, y, dir, speed, numCode)
+function NumberBullet:init(x, y, dir, speed, numCode,scale)
     -- Last argument = sprite path
     super.init(self, x, y, "bullets/math_" .. numCode);
     self:assignColliders(numCode);
     self.destroy_on_hit = false;    
     self.physics.direction = dir;
     self.physics.speed = speed;
-    self:setScale(1.4);
+    self:setScale(scale);
 end
 
 function NumberBullet:update()
