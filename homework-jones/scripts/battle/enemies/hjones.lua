@@ -13,6 +13,10 @@ function HJones:init()
     self.defense = 0
     self.money = 100
 
+    self.TOTAL_CHEW_DIALOGUES = 0;
+    self.TOTAL_SLUDGE_DIALOGUES = 0;
+    self.TOTAL_SOLVE_DIALOGUES = 2;
+
     -- List of possible wave ids, randomly picked each turn
     self.waves = {
         "mathblaster",
@@ -67,6 +71,10 @@ function HJones:init()
     self.wordProblemsGiven = 0;
     self.solveForXPicked = false;
     self.soggySolvePicked = false;
+    self.solveDialoguesSeen = 0;
+    self.chewDialoguesSeen = 0;
+    self.sludgeDialoguesSeen = 0;
+    self.fightDialoguesSeen = 0;
 
     self:registerAct("EatHW")
     self:registerAct("EatHWX","",{"susie"})
@@ -76,6 +84,7 @@ end
 
 function HJones:onAct(battler, name)
     if name == "EatHW" then
+        self.lastTurnChewed = true;
         if self.chewed == 0 then
             Game.battle:startActCutscene("firstchew", "firstChew",false,self)
             return
@@ -90,6 +99,7 @@ function HJones:onAct(battler, name)
             }
         end
     elseif name == "EatHWX" then
+        self.lastTurnChewed = true;
         if not self.tagteamed then
             self.tagteamed = true;
             Game.battle:startActCutscene("eathwx", "eathwx",false,self)
@@ -105,22 +115,21 @@ function HJones:onAct(battler, name)
             }
         end
     elseif name == "Solve" then
+        self.lastTurnSolved = true;
         Game.battle:startActCutscene("solve","solve",false,self);
     elseif name == "SolveForX" then
+        self.lastTurnSolved = true;
         Game.battle:startActCutscene("solveforx","solveforx",false,self);
     elseif name == "Standard" then --X-Action
-        -- Give the enemy 50% mercy
-        self:addMercy(50)
         if battler.chara.id == "ralsei" then
             -- R-Action text
-            return "* Ralsei bowed politely.\n* The dummy spiritually bowed\nin return."
+            return "* WHOOPS WE FORGOT TO\n* PUT IN THE R-ACTION!!"
         elseif battler.chara.id == "susie" then
             -- S-Action: start a cutscene (see scripts/battle/cutscenes/dummy.lua)
-            Game.battle:startActCutscene("dummy", "susie_punch")
-            return
+            return "* WHOOPS WE FORGOT TO\n* PUT IN THE S-ACTION!!"
         else
             -- Text for any other character (like Noelle)
-            return "* "..battler.chara:getName().." straightened the\ndummy's hat."
+            return "* Well this isn't supposed to happen."
         end
     end
 
@@ -128,5 +137,37 @@ function HJones:onAct(battler, name)
     -- (this handles the Check act)
     return super.onAct(self, battler, name)
 end
+function HJones:afterBasicWave()
+    local fought = self.lastTurnHurt;
+    self.lastTurnHurt = false;
+    local chewed = self.lastTurnChewed;
+    self.lastTurnChewed = false;
+    local solved = self.lastTurnSolved;
+    self.lastTurnSolved = false;
 
+    if self.chewed >= 10 then
+        self.sludgeDialoguesSeen = self.sludgeDialoguesSeen + 1;
+        if self.sludgeDialoguesSeen > self.TOTAL_SLUDGE_DIALOGUES then
+            return
+        end
+        --do sludge puddle dialogue
+    elseif chewed then
+        self.chewDialoguesSeen = self.chewDialoguesSeen + 1;
+        if self.chewDialoguesSeen > self.TOTAL_CHEW_DIALOGUES then
+            return
+        end
+        --do chew warning dialogue
+    elseif solved then
+        self.solveDialoguesSeen = self.solveDialoguesSeen + 1;
+        if self.solveDialoguesSeen > self.TOTAL_SOLVE_DIALOGUES then
+            return
+        end
+        --do happy solving dialogue
+        Game.battle:startCutscene("postsolve" .. self.solveDialoguesSeen, "postsolve" .. self.solveDialoguesSeen,false,self);
+    end
+end
+function HJones:hurt(amount, battler, on_defeat, color, show_status, attacked)
+    self.lastTurnHurt = true;
+    super.hurt(self,amount, battler, on_defeat, color, show_status, attacked)
+end
 return HJones

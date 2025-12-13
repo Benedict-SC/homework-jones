@@ -22,7 +22,7 @@ function actor:init()
     -- Path to this actor's sprites (defaults to "")
     self.path = "enemies/jones"
     -- This actor's default sprite or animation, relative to the path (defaults to "")
-    self.default = "homework"
+    self.default = "idle"
 
     -- Sound to play when this actor speaks (optional)
     self.voice = nil
@@ -39,9 +39,7 @@ function actor:init()
 
     -- Table of sprite animations
     self.animations = {
-        -- Looping animation with 0.25 seconds between each frame
-        -- (even though there's only 1 idle frame)
-        ["idle"] = {"homework", 0.25, true},
+        ["idle"] = {"idle", 0.08, true},
     }
 
     -- Table of sprite offsets (indexed by sprite name)

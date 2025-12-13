@@ -4,7 +4,6 @@ return {
 
     ---@param cutscene BattleCutscene
     firstChew = function(cutscene,battler,enemy)
-        --local enemy = Game.battle.attackers[1]
         cutscene:text("* You took Homework Jones's hand...");
         cutscene:text("* ...and bit down on it like a paper burrito.");
         Assets.playSound("impact")

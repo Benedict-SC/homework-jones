@@ -122,6 +122,7 @@ function MultipleChoice:onStart()
     self.readtime = 6;
     self.UI_DISPLACE = 110;
     local attacker = self:getAttackers()[1];
+    self.jones = attacker;
     attacker.current_target = "ALL";
     if attacker.multIndex > #MultipleChoice.questions then
         self.q = {
@@ -389,6 +390,7 @@ function MultipleChoice:onEnd()
     self:getAttackers()[1].x = self.jones_save;
     self.bg:remove();
     self.boat:remove();
+    self.jones:afterBasicWave();
 end
 
 return MultipleChoice

@@ -12,7 +12,11 @@ return {
         cutscene:text("* You and Susie went at Homework\nJones like dogs at a bone.");
         Assets.playSound("impact")
         enemy:shake(4);
-        enemy.chewed = enemy.chewed + 4;
+        if enemy.chewed == 0 then
+            enemy.chewed = 2;
+        else
+            enemy.chewed = enemy.chewed + 4;
+        end
         cutscene:battlerText({enemy},"KYA???",{wait=false});
         cutscene:text("[react:1]",nil,{reactions= {{
             "Tastes like printer jam.",300,30,"sincere_smile","susie"

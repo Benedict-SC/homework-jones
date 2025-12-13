@@ -2,6 +2,7 @@ local Essay, super = Class(Wave)
 
 function Essay:onStart()
     self.time = 10;
+    self.jones = self:getAttackers()[1];
     self.testtext = "this is a bunch of text that we're going to attempt to write out into the textbox"
     self.testprog = 1;
     self.input = {""}
@@ -254,6 +255,13 @@ end
 
 function Essay:onEnd()
    TextInput.endInput(); 
+
+   --reset flags from last turn- you don't get this wave unless you just solved, but if you mixed it up with some attacks, it should ignore those.
+   self.jones.lastTurnHurt = false;
+   self.jones.lastTurnChewed = false;
+   self.jones.lastTurnSolved = false;
+
+   --load response cutscene
    local dialogue = self:getFriendDialogue();
    self.questionText:remove();
    self.instructionText:remove();

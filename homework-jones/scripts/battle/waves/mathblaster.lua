@@ -5,6 +5,7 @@ function MathBlaster:onStart()
     self.time = 14;
     self.bulletspeed = 5;
     local equations = {
+        {2,"plus",2,"plus","zero",{"equals"},answers={"4","22","0"},size=1.7,wobbleOffset=0.1},
         {{"sqrt",5},4,"times",6,"plus",1,{"equals"},answers={"5","13","6"},size=1.4,wobbleOffset=0},
         {7,"minus",8,"div",2,{"equals"},answers={"3","-.5","9"},size=1.7,wobbleOffset=0.1}
     }
@@ -48,7 +49,7 @@ function MathBlaster:onStart()
                     t[i], t[j] = t[j], t[i]
                 end
                 for i=1,#t,1 do
-                    self:spawnBullet("answerorb",700,173,t[i],eq.answers[i],i==1);
+                    self:spawnBullet("answerorb",700,172,t[i],eq.answers[i],i==1);
                 end
             end);
         end
@@ -72,6 +73,9 @@ function MathBlaster:update()
         end
     end
     super.update(self)
+end
+function MathBlaster:onEnd()
+    self.jones:afterBasicWave();
 end
 
 return MathBlaster
