@@ -8,13 +8,13 @@ return {
         for i=1,#dialogue do
             local line = dialogue[i];
             if type(line) == "string" then
-                cutscene:battlerText({enemy},line);
+                cutscene:battlerText(enemy,line);
             elseif type(line) == "table" then
                 if line.who then
                     cutscene:setSpeaker(line.who);
                     cutscene:text(line.what,line.face);
                 elseif line.react then
-                    cutscene:battlerText({enemy},line.what,{wait=false});
+                    cutscene:battlerText(enemy,line.what,{wait=false});
                     cutscene:text("[react:1]",nil,{reactions= { {
                         line.react,line.rx,line.ry,line.reactface,line.reactwho
                     }}});

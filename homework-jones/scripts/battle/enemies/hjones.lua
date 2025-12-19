@@ -15,12 +15,14 @@ function HJones:init()
 
     self.TOTAL_CHEW_DIALOGUES = 0;
     self.TOTAL_SLUDGE_DIALOGUES = 0;
-    self.TOTAL_SOLVE_DIALOGUES = 2;
+    self.TOTAL_SOLVE_DIALOGUES = 3;
 
     -- List of possible wave ids, randomly picked each turn
     self.waves = {
+        --"favorite",
         "mathblaster",
-        "multiplechoice"
+        "multiplechoice",
+        --"solow",
     }
 
     -- Dialogue randomly displayed in the enemy's speech bubble
@@ -28,7 +30,6 @@ function HJones:init()
         "Kya ha ha!",
         "I'm Homework Jones!",
         "Solve my puzzles\nand problems!",
-        "I before E except in\na lot of situations!"
     }
 
     -- Check text (automatically has "ENEMY NAME - " at the start)

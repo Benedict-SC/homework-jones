@@ -1,6 +1,6 @@
-local Essay, super = Class(Wave)
+local Favorite, super = Class(Wave)
 
-function Essay:onStart()
+function Favorite:onStart()
     self.time = 10;
     self.jones = self:getAttackers()[1];
     self.testtext = "this is a bunch of text that we're going to attempt to write out into the textbox"
@@ -12,7 +12,7 @@ function Essay:onStart()
     self:moveArena();
     self.questionText = Text("Essay question 1:\nWho is your favorite friend?",200,100,250,nil,{align="center"});
     Game.battle:addChild(self.questionText);
-    self.instructionText = Text("Type your answer\n[wave]vv[wave:0]   with the keyboard!   [wave]vv[wave:0]",-100,285,nil,nil,{color={0.5,0.5,0.5},align="center",font_size=18});
+    self.instructionText = Text("Type your answer\n[wave]vv[wave:0]       with the keyboard! [wave]vv[wave:0]",-110,285,nil,nil,{color={0.5,0.5,0.5},align="center",font_size=18});
     Game.battle:addChild(self.instructionText);
     TextInput.attachInput(self.input,{
         enter_submits = false,
@@ -26,7 +26,7 @@ function Essay:onStart()
     end)]]
 end
 
-function Essay:moveArena()
+function Favorite:moveArena()
     self.timer:approach(0.2,Game.battle.arena.y,Game.battle.arena.y + 80,function(num) 
         local dist = num - Game.battle.arena.y;
         Game.battle.arena.y = num;
@@ -34,13 +34,13 @@ function Essay:moveArena()
     end);
 end
 
-function Essay:update()
+function Favorite:update()
     -- Code here gets called every frame
     Game.battle.battle_ui.encounter_text.text:setText("[instant]" .. self.input[1]);
     super.update(self)
 end
 
-function Essay:getFriendDialogue()
+function Favorite:getFriendDialogue()
     local resp = string.lower(self.input[1]);
     local indexmap = {};
     indexmap[1] = {string.find(resp,"noel"),"noelle"};
@@ -60,6 +60,7 @@ function Essay:getFriendDialogue()
     indexmap[15] = {string.find(resp,"snowy"),"snowy"};
     indexmap[16] = {string.find(resp,"tem"),"temmie"};
     indexmap[17] = {string.find(resp,"mk"),"mk"};
+    indexmap[18] = {string.find(resp,"homework jones"),"jones"};
     table.sort(indexmap, function(a,b) 
         if a[1] and b[1] then 
             return a[1] < b[1];
@@ -76,6 +77,8 @@ function Essay:getFriendDialogue()
     if firstFriendNotFound then 
         if string.find(resp,string.lower(Game.save_name)) then
             firstFriend = "playername";
+        elseif resp:gsub("%s+", "") == "" then
+            firstFriend = "blank"
         else
             firstFriend = "default";
         end
@@ -201,7 +204,7 @@ function Essay:getFriendDialogue()
             "Kris,[wait:5] the teacher can't\nreally be your friend.",
             "Especially not YOUR teacher.",
             "I know she does her best.",
-            "But even though she made me\n[wave]\"kool\"[wave:0] so I could connect to you,",
+            "But even though she made me\n[wave]\"kool\"[wave:0]  so I could connect to you,",
             "I can tell she has no\nclue how teenagers feel.",
             "So you don't have\nto be nice to her.",
             "Let's find friends closer\nto your age,[wait:5] okay?"
@@ -248,12 +251,27 @@ function Essay:getFriendDialogue()
             "So that's why...",
             "I can't give you more\nthan partial credit!"
         }
+    elseif firstFriend == "jones" then
+        return {
+            "...",
+            "I'm not giving you\nextra credit for this.",
+            "In fact,[wait:5] I'm assigning\nyou six more hours...",
+            "Of [wave]Fun Times with\nYour Favorite Jones!!!!!",
+            "And also,[wait:5] geography!",
+        }
+    elseif firstFriend == "blank" then
+        self.jones.friendless = true;
+        return {
+            "Not even showing your work?",
+            "Kris,[wait:5] are you dozing\noff in class again?",
+            "I'm going to have to\nassign you makeup bullets!"
+        }
     else
         return {"That person isn't on\nmy class roster.","But I'm sure you're\ngreat friends,[wait:5] probably!","Partial credit!"}
     end
 end
 
-function Essay:onEnd()
+function Favorite:onEnd()
    TextInput.endInput(); 
 
    --reset flags from last turn- you don't get this wave unless you just solved, but if you mixed it up with some attacks, it should ignore those.
@@ -268,4 +286,4 @@ function Essay:onEnd()
    Game.battle:startCutscene("favoritefriend", "favoriteFriend",self:getAttackers()[1],dialogue);
 end
 
-return Essay
+return Favorite
