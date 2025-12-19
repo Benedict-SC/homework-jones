@@ -10,7 +10,7 @@ return {
                 cutscene:text("* A disgusting mash got stuck on Ralsei's claws.");
                 cutscene:setSpeaker("ralsei");
                 cutscene:text("M-[wait:3]Mr. Jones,[wait:5] can I wash my hands,[wait:5] please?","shock");
-                cutscene:battlerText({enemy},"I don't know,[wait:5] Prince,[wait:5][wave]CAN[wave:0] you?");
+                cutscene:battlerText(enemy,"I don't know,[wait:5] Prince,[wait:5][wave]CAN[wave:0] you?");
                 enemy.soggySolvePicked = true;
             else
                 cutscene:text("* Ralsei is still covered in spit wads.");

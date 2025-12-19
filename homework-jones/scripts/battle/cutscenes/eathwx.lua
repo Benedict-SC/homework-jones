@@ -17,14 +17,14 @@ return {
         else
             enemy.chewed = enemy.chewed + 4;
         end
-        cutscene:battlerText({enemy},"KYA???",{wait=false});
+        cutscene:battlerText(enemy,"KYA???",{wait=false});
         cutscene:text("[react:1]",nil,{reactions= {{
             "Tastes like printer jam.",300,30,"sincere_smile","susie"
         }}});
         cutscene:text("* Homework Jones got less readable!")
-        cutscene:battlerText({enemy},"Whuh--[wait:5] that was worth\nten percent of your grade!");
-        cutscene:battlerText({enemy},"...Kya ha,[wait:5] huhh,\n[wait:5]Kris,[wait:5] Susie...");
-        cutscene:battlerText({enemy},"A-[wait:3]aren't you two\ngetting enough to eat?");
-        cutscene:battlerText({enemy},"School lunches\nare discounted 5% on\nalternating Thursdays!!");
+        cutscene:battlerText(enemy,"Whuh--[wait:5] that was worth\nten percent of your grade!");
+        cutscene:battlerText(enemy,"...Kya ha,[wait:5] huhh,\n[wait:5]Kris,[wait:5] Susie...");
+        cutscene:battlerText(enemy,"A-[wait:3]aren't you two\ngetting enough to eat?");
+        cutscene:battlerText(enemy,"School lunches\nare discounted 5% on\nalternating Thursdays!!");
     end
 }
