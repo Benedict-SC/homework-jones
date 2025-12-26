@@ -86,6 +86,9 @@ end
 function HJones:onAct(battler, name)
     if name == "EatHW" then
         self.lastTurnChewed = true;
+        if self.solveDialoguesSeen == 3 then
+            self.kindnessInterrupted = true;
+        end
         if self.chewed == 0 then
             Game.battle:startActCutscene("firstchew", "firstChew",false,self)
             return
@@ -101,6 +104,9 @@ function HJones:onAct(battler, name)
         end
     elseif name == "EatHWX" then
         self.lastTurnChewed = true;
+        if self.solveDialoguesSeen == 3 then
+            self.kindnessInterrupted = true;
+        end
         if not self.tagteamed then
             self.tagteamed = true;
             Game.battle:startActCutscene("eathwx", "eathwx",false,self)
@@ -138,7 +144,7 @@ function HJones:onAct(battler, name)
     -- (this handles the Check act)
     return super.onAct(self, battler, name)
 end
-function HJones:afterBasicWave()
+function HJones:beforeBasicWave(cutscene)
     local fought = self.lastTurnHurt;
     self.lastTurnHurt = false;
     local chewed = self.lastTurnChewed;
@@ -164,11 +170,12 @@ function HJones:afterBasicWave()
             return
         end
         --do happy solving dialogue
-        Game.battle:startCutscene("postsolve" .. self.solveDialoguesSeen, "postsolve" .. self.solveDialoguesSeen,false,self);
+        cutscene:gotoCutscene("presolve" .. self.solveDialoguesSeen, "presolve" .. self.solveDialoguesSeen,false,self);
     end
 end
 function HJones:hurt(amount, battler, on_defeat, color, show_status, attacked)
     self.lastTurnHurt = true;
+    self.kindnessInterrupted = true;
     super.hurt(self,amount, battler, on_defeat, color, show_status, attacked)
 end
 return HJones

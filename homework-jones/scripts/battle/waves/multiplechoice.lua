@@ -390,7 +390,6 @@ function MultipleChoice:onEnd()
     self:getAttackers()[1].x = self.jones_save;
     self.bg:remove();
     self.boat:remove();
-    self.jones:afterBasicWave();
 end
 
 return MultipleChoice

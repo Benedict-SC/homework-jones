@@ -77,8 +77,5 @@ function MathBlaster:update()
     end
     super.update(self)
 end
-function MathBlaster:onEnd()
-    self.jones:afterBasicWave();
-end
 
 return MathBlaster
