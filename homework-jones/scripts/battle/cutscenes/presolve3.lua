@@ -5,8 +5,6 @@ return {
     ---@param cutscene BattleCutscene
     presolve3 = function(cutscene,battler,enemy)
         cutscene:battlerText(enemy,"Having problems?[wait:5] Make\nthem word problems!");
-        cutscene:battlerText(enemy,"Puzzles and problems\nmake education a breeze!");
-        cutscene:battlerText(enemy,"See,[wait:5] aren't you learning a ton?");
-        cutscene:battlerText(enemy,"Way better than\nboring old class!");
+        cutscene:battlerText(enemy,"And you can't get cyberbullied\non Charlotte's Web! Kya-ha-ha!");
     end
 }

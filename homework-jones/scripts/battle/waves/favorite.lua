@@ -146,10 +146,10 @@ function Favorite:getFriendDialogue()
             "Maybe you should pick\nsomeone else,[wait:5] then.",
             "Good influences are\nimportant,[wait:5] Kris.",
             "Don't give in to the slippery\nslope of peer pressure.",
-            "Or you might end up in a place...",
-            "...you can't think your way out of.",
+            "Or you might end\nup in a place...",
+            "...you can't think\nyour way out of.",
             ".[wait:10].[wait:10].[wait:10]",
-            "Wh-[wait:5] K-[wait:3]kris![wait:5]\nDon't snarl at your homework!"
+            "Wh-[wait:5] K-[wait:3]Kris![wait:5]\nDon't snarl at your homework!"
         }
     elseif firstFriend == "december" then
         return{

@@ -7,7 +7,7 @@ return {
             if enemy.mercy >= 27 and enemy.wordProblemsGiven == 0 then
                 cutscene:text("* Homework Jones's face opens to reveal an essay question!");
                 enemy.wave_override = "favorite";
-                enemy.dialogue_override = "Now,[wait:5] let's get excited\n about LONG ANSWER!"
+                enemy.dialogue_override = "Now,[wait:5] let's get excited\nabout LONG ANSWER!"
                 enemy.wordProblemsGiven = 1;
             elseif enemy.mercy >= 54 and enemy.wordProblemsGiven == 1 then
                 cutscene:text("* Homework Jones's face opens to reveal a word problem!");
