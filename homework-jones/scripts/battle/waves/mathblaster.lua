@@ -17,6 +17,9 @@ function MathBlaster:onStart()
     self.eq = eq;
     local symbolIndex = 1;
     self.answersSpawned = false;
+    self.chewRatio = (self.jones.chewed - 2) * 0.08;
+    if self.chewRatio > 0.8 then self.chewRatio = 0.8 end
+    if self.chewRatio < 0 then self.chewRatio = 0 end
     self.timer:every(0.65,function() 
         if symbolIndex <= #eq then
             --local yDisplace = math.random(30,60);
@@ -35,7 +38,7 @@ function MathBlaster:onStart()
                     self.timer:after(1,function() self:slowdown() end);
                 end
             else
-                local bullet = self:spawnBullet("numberbullet",670,180,math.pi,self.bulletspeed,numcode,eq.size);
+                local bullet = self:spawnBullet("numberbullet",670,180,math.pi,self.bulletspeed,numcode,eq.size,self.chewRatio);
                 bullet.originalY = bullet.y;
                 self:bulletWiggleAdjust(bullet);
             end
