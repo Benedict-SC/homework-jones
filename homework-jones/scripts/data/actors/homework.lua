@@ -11,7 +11,7 @@ function actor:init()
     self.height = 46
 
     -- Hitbox for this actor in the overworld (optional, uses width and height by default)
-    self.hitbox = {0, 25, 19, 14}
+    self.hitbox = {10, 45, 38, 14}
 
     -- Color for this actor used in outline areas (optional, defaults to red)
     self.color = {0, 0, 1}
@@ -22,7 +22,7 @@ function actor:init()
     -- Path to this actor's sprites (defaults to "")
     self.path = "enemies/jones"
     -- This actor's default sprite or animation, relative to the path (defaults to "")
-    self.default = "idle"
+    self.default = "onespin"
 
     -- Sound to play when this actor speaks (optional)
     self.voice = nil
@@ -39,7 +39,74 @@ function actor:init()
 
     -- Table of sprite animations
     self.animations = {
-        ["idle"] = {"idle", 0.08, true},
+        ["idle"] = {"idle", function(sprite, wait)
+            while true do
+                sprite:setFrame(2)
+                wait(0.08)
+                sprite:setFrame(3)
+                wait(0.6)
+                sprite:setFrame(2)
+                wait(0.08)
+                sprite:setFrame(1)
+                wait(0.08)
+                sprite:setFrame(4)
+                wait(0.08)
+                sprite:setFrame(5)
+                wait(0.6)
+                sprite:setFrame(4)
+                wait(0.08)
+                sprite:setFrame(1)
+                wait(0.08)
+            end
+        end},
+        ["static"] = {"static", "0.25", true},
+        ["spinny"] = {"spinny",function(sprite, wait)
+            while true do
+                sprite:setFrame(4)
+                wait(0.08)
+                sprite:setFrame(1)
+                wait(0.08)
+                sprite:setFrame(2)
+                wait(0.08)
+                sprite:setFrame(3)
+                wait(0.08)
+                sprite:setFrame(1)
+                wait(0.08)
+                sprite:setFrame(2)
+                wait(0.08)
+                sprite:setFrame(3)
+                wait(0.08)
+                sprite:setFrame(4)
+                wait(0.08)
+                sprite:setFrame(5)
+                wait(0.08)
+                sprite:setFrame(6)
+                wait(0.8)
+            end
+        end},
+        ["onespin"] = {"spinny",function(sprite, wait)
+            --no loop
+                sprite:setFrame(4)
+                wait(0.08)
+                sprite:setFrame(1)
+                wait(0.08)
+                sprite:setFrame(2)
+                wait(0.08)
+                sprite:setFrame(3)
+                wait(0.08)
+                sprite:setFrame(1)
+                wait(0.08)
+                sprite:setFrame(2)
+                wait(0.08)
+                sprite:setFrame(3)
+                wait(0.08)
+                sprite:setFrame(4)
+                wait(0.08)
+                sprite:setFrame(5)
+                wait(0.08)
+                sprite:setFrame(6)
+                wait(0.4)
+        end,["next"]="idle"}
     }
 
     -- Table of sprite offsets (indexed by sprite name)

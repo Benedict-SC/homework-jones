@@ -77,12 +77,21 @@ function HJones:init()
     self.sludgeDialoguesSeen = 0;
     self.fightDialoguesSeen = 0;
 
+    self.lastSpinTime = Kristal.getTime();
+    self.spinDelay = 6;
+
     self:registerAct("EatHW")
     self:registerAct("EatHWX","",{"susie"})
     self:registerAct("Solve")
     self:registerAct("SolveForX", "", {"ralsei"})
 end
-
+function HJones:update()
+    local freestate = Game.battle.state == "MENUSELECT" or Game.battle.state == "ENEMYSELECT" or Game.battle.state == "PARTYSELECT" or Game.battle.state == "ACTIONSELECT"
+    if freestate and Kristal.getTime() > self.lastSpinTime + self.spinDelay then
+        self:spin();
+    end
+    return super.update(self)
+end
 function HJones:onAct(battler, name)
     if name == "EatHW" then
         self.lastTurnChewed = true;
@@ -177,5 +186,10 @@ function HJones:hurt(amount, battler, on_defeat, color, show_status, attacked)
     self.lastTurnHurt = true;
     self.kindnessInterrupted = true;
     super.hurt(self,amount, battler, on_defeat, color, show_status, attacked)
+end
+function HJones:spin()
+    self.lastSpinTime = Kristal.getTime();
+    self.spinDelay = 6 + 3*math.random();
+    self.sprite:setAnimation("onespin");
 end
 return HJones
