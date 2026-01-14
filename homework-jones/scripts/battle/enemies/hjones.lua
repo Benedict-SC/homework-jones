@@ -22,9 +22,10 @@ function HJones:init()
     self.waves = {
         --"basic"
         --"favorite",
-        "mathblaster",
-        "multiplechoice",
+        --"mathblaster",
+        --"multiplechoice",
         --"solow",
+        "mewmew"
     }
 
     -- Dialogue randomly displayed in the enemy's speech bubble

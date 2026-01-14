@@ -31,8 +31,8 @@ function Solow:moveArena()
 end
 function Solow:initialDialogue()
     self.solowState = "DIALOGUE";
-   local cutscene = Game.battle:startCutscene("solowstart", "solowstart",self.jones);
-   cutscene:after(function() self:afterChoice() end);
+    local cutscene = Game.battle:startCutscene("solowstart", "solowstart",self.jones);
+    cutscene:after(function() self:afterChoice() end);
 end
 function Solow:afterChoice()
     if self.jones.tryYourBest then
