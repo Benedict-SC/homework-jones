@@ -12,13 +12,15 @@ function HJones:init()
     self.attack = 11
     self.defense = 0
     self.money = 100
+    self.dialogue_offset = {0,10};
 
-    self.TOTAL_CHEW_DIALOGUES = 0;
-    self.TOTAL_SLUDGE_DIALOGUES = 0;
+    self.TOTAL_CHEW_DIALOGUES = 3;
+    self.TOTAL_SLUDGE_DIALOGUES = 11;
     self.TOTAL_SOLVE_DIALOGUES = 3;
 
     -- List of possible wave ids, randomly picked each turn
     self.waves = {
+        --"basic"
         --"favorite",
         "mathblaster",
         "multiplechoice",
@@ -102,14 +104,8 @@ function HJones:onAct(battler, name)
             Game.battle:startActCutscene("firstchew", "firstChew",false,self)
             return
         else
-            self.chewed = self.chewed + 2;
-            Assets.playSound("impact")
-            self:shake(4);
-
-            return {
-            "* You devoured more of the Fruits of Knowledge.",
-            "* Homework Jones got even less readable."
-            }
+            Game.battle:startActCutscene("laterchews", "laterchews",false,self)
+            return
         end
     elseif name == "EatHWX" then
         self.lastTurnChewed = true;
@@ -121,14 +117,8 @@ function HJones:onAct(battler, name)
             Game.battle:startActCutscene("eathwx", "eathwx",false,self)
             return
         else
-            self.chewed = self.chewed + 4;
-            Assets.playSound("impact")
-            self:shake(4);
-
-            return {
-            "* You and Susie devoured more of the Fruits of Knowledge.",
-            "* Homework Jones got even less readable."
-            }
+            Game.battle:startActCutscene("laterchewsx", "laterchewsx",false,self)
+            return
         end
     elseif name == "Solve" then
         self.lastTurnSolved = true;
@@ -161,18 +151,22 @@ function HJones:beforeBasicWave(cutscene)
     local solved = self.lastTurnSolved;
     self.lastTurnSolved = false;
 
-    if self.chewed >= 10 then
+    if self.chewed == 2 then
+        return --cutscene logic for first chew handled by act cutscenes. don't increment counter.
+    elseif self.chewed >= 10 then
         self.sludgeDialoguesSeen = self.sludgeDialoguesSeen + 1;
         if self.sludgeDialoguesSeen > self.TOTAL_SLUDGE_DIALOGUES then
             return
         end
         --do sludge puddle dialogue
+        cutscene:gotoCutscene("sludge" .. self.sludgeDialoguesSeen, "sludge" .. self.sludgeDialoguesSeen,false,self);
     elseif chewed then
         self.chewDialoguesSeen = self.chewDialoguesSeen + 1;
         if self.chewDialoguesSeen > self.TOTAL_CHEW_DIALOGUES then
             return
         end
         --do chew warning dialogue
+        cutscene:gotoCutscene("warning" .. self.chewDialoguesSeen, "warning" .. self.chewDialoguesSeen,false,self);
     elseif solved then
         self.solveDialoguesSeen = self.solveDialoguesSeen + 1;
         if self.solveDialoguesSeen > self.TOTAL_SOLVE_DIALOGUES then
@@ -191,5 +185,15 @@ function HJones:spin()
     self.lastSpinTime = Kristal.getTime();
     self.spinDelay = 6 + 3*math.random();
     self.sprite:setAnimation("onespin");
+end
+function HJones:permaPuddle()
+    self.text = self.ouchieText;
+    Game.battle.music:play("studysession_slow");
+    self.dialogue_offset = {0,55};
+    self.sprite:setAnimation("puddle");
+    self:shake(4);
+    self.sprite.setAnimation = function(self)
+        --do nothing- he's stuck like this
+    end
 end
 return HJones

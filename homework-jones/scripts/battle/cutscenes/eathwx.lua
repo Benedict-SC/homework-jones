@@ -10,21 +10,26 @@ return {
                 }}});
         cutscene:setSpeaker(nil);
         cutscene:text("* You and Susie went at Homework\nJones like dogs at a bone.");
+        enemy.sprite:setAnimation("pain_brief");
         Assets.playSound("impact")
         enemy:shake(4);
         if enemy.chewed == 0 then
             enemy.chewed = 2;
+            cutscene:battlerText(enemy,"KYA???",{wait=false});
+            cutscene:text("[react:1]",nil,{reactions= {{
+                "Tastes like printer jam.",300,30,"sincere_smile","susie"
+            }}});
+            cutscene:text("* Homework Jones got less readable!")
+            enemy.sprite:setAnimation("scold");
+            cutscene:battlerText(enemy,"Whuh--[wait:5] that was worth\nten percent of your grade!");
+            enemy.sprite:setAnimation("hmm");
+            cutscene:battlerText(enemy,"...Kya ha,[wait:5] huhh,\n[wait:5]Kris,[wait:5] Susie...");
+            cutscene:battlerText(enemy,"A-[wait:3]aren't you two\ngetting enough to eat?");
+            enemy.sprite:setAnimation("idle");
+            cutscene:battlerText(enemy,"School lunches\nare discounted 5% on\nalternating Thursdays!!");
         else
             enemy.chewed = enemy.chewed + 4;
+            cutscene:gotoCutscene("checkchewaftereat", "checkchewaftereat",battler,enemy,enemy.chewed - 4);
         end
-        cutscene:battlerText(enemy,"KYA???",{wait=false});
-        cutscene:text("[react:1]",nil,{reactions= {{
-            "Tastes like printer jam.",300,30,"sincere_smile","susie"
-        }}});
-        cutscene:text("* Homework Jones got less readable!")
-        cutscene:battlerText(enemy,"Whuh--[wait:5] that was worth\nten percent of your grade!");
-        cutscene:battlerText(enemy,"...Kya ha,[wait:5] huhh,\n[wait:5]Kris,[wait:5] Susie...");
-        cutscene:battlerText(enemy,"A-[wait:3]aren't you two\ngetting enough to eat?");
-        cutscene:battlerText(enemy,"School lunches\nare discounted 5% on\nalternating Thursdays!!");
     end
 }

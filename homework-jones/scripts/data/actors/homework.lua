@@ -60,6 +60,13 @@ function actor:init()
             end
         end},
         ["static"] = {"static", "0.25", true},
+        ["fear"] = {"fear", "0.25", true},
+        ["nonplussed"] = {"nonplussed", "0.25", true},
+        ["lecture"] = {"lecture", "0.25", true},
+        ["scold"] = {"scold", "0.25", true},
+        ["puddle"] = {"puddle", "0.25", true},
+        ["pain"] = {"pain", "0.1", true},
+        ["hmm"] = {"hmm", "0.2", true},
         ["spinny"] = {"spinny",function(sprite, wait)
             while true do
                 sprite:setFrame(4)
@@ -106,6 +113,34 @@ function actor:init()
                 wait(0.08)
                 sprite:setFrame(6)
                 wait(0.4)
+        end,["next"]="idle"},
+        ["pain_brief"] = {"pain",function(sprite,wait)
+                sprite:setFrame(1)
+                wait(0.08)
+                sprite:setFrame(2)
+                wait(0.08)
+                sprite:setFrame(1)
+                wait(0.08)
+                sprite:setFrame(2)
+                wait(0.08)
+                sprite:setFrame(1)
+                wait(0.08)
+                sprite:setFrame(2)
+                wait(0.08)
+        end,["next"]="fear"},
+        ["pain_normal"] = {"pain",function(sprite,wait)
+                sprite:setFrame(1)
+                wait(0.08)
+                sprite:setFrame(2)
+                wait(0.08)
+                sprite:setFrame(1)
+                wait(0.08)
+                sprite:setFrame(2)
+                wait(0.08)
+                sprite:setFrame(1)
+                wait(0.08)
+                sprite:setFrame(2)
+                wait(0.08)
         end,["next"]="idle"}
     }
 

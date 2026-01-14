@@ -2,6 +2,7 @@ local Basic, super = Class(Wave)
 
 function Basic:onStart()
     -- Every 0.33 seconds...
+    self.time = 2;
     self.timer:every(1/3, function()
         -- Our X position is offscreen, to the right
         local x = SCREEN_WIDTH + 20
