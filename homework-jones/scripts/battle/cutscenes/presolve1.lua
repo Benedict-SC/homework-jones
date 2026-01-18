@@ -4,6 +4,7 @@ return {
 
     ---@param cutscene BattleCutscene
     presolve1 = function(cutscene,battler,enemy)
+        self.dialogue = self.solveDialogue;
         cutscene:battlerText(enemy,"Check it out,[wait:5] kids![wait:5] Isn't\nthis fun?[wait:5] Kya ha ha!");
         cutscene:battlerText(enemy,"Even if you don't like\nschool,[wait:5] I bet you like\nflips and tricks,[wait:5] right?");
         enemy.dialogue_override = "Now you can find the\nsquare root of flips or\nthe cosine of tricks!";

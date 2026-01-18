@@ -64,6 +64,8 @@ function actor:init()
         ["nonplussed"] = {"nonplussed", "0.25", true},
         ["lecture"] = {"lecture", "0.25", true},
         ["scold"] = {"scold", "0.25", true},
+        ["dark"] = {"dark", "0.25", true},
+        ["patient"] = {"patient", "0.25", true},
         ["puddle"] = {"puddle", "0.25", true},
         ["pain"] = {"pain", "0.1", true},
         ["hmm"] = {"hmm", "0.2", true},

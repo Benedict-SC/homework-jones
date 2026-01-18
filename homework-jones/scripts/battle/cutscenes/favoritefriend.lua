@@ -20,6 +20,8 @@ return {
                     }}});
                 elseif line.what then
                     cutscene:text(line.what);
+                elseif line.anim then
+                    enemy.sprite:setAnimation(line.anim);
                 end
             end
         end

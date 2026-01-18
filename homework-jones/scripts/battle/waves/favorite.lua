@@ -87,22 +87,31 @@ function Favorite:getFriendDialogue()
         return {
             "There's no L in\n\"FAVORITE FRIEND\"!",
             "Great choice,[wait:5] Kris!",
+            {anim="hmm"},
             "Say...[wait:15] Kris,[wait:5]\nwhere's Noelle?",
             "Usually she'd be helping\nwith your work.",
+            {anim="idle"},
             "And you know what\nthey say,[wait:5] Kris:",
             "The friend that studies\ntogether,[wait:5] buddies together!",
+            {anim="hmm"},
             "So why did you\nstop hanging...[wait:30] out...",
-            "([shake:1]B-brr...[shake:0][wait:15] what's this\nchill down my back[wait:5].[wait:5].[wait:5].[wait:5]?)"
+            {anim="fear"},
+            "([shake:1]B-brr...[shake:0][wait:15] what's this\nchill down my back[wait:5].[wait:5].[wait:5].[wait:5]?)",
+            {anim="idle"},
         }
     elseif firstFriend == "susie" then
         return {
             {who="susie",face="surprise_frown",what="Wait,[wait:5] huh?"},
             "You've been helping\nher out,[wait:5] huh?",
             "Normally,[wait:5] Susie[wait:5] \n\"forgets\"[wait:5] her work.",
+            {anim="nonplussed"},
             "And glares when Miss\nAlphys collects it.",
+            {anim="idle"},
             "But since you became friends...",
             "She ACTUALLY forgets her work!",
+            {anim="patient"},
             "Which,[wait:5] is still\na failing grade.",
+            {anim="idle"},
             "But you're doing\nyour best,[wait:5] Kris.",
             "Maybe she'll learn\nyour positive attitude.",
             "Then you can\nBe Plus together!",
@@ -114,7 +123,9 @@ function Favorite:getFriendDialogue()
     elseif firstFriend == "ralsei" then
         return {
             {who="ralsei",face="blush_surprise",what="O-[wait:3]oh!"},
+            {anim="lecture"},
             "Full marks,[wait:5] Kris!",
+            {anim="idle"},
             "Prince Ralsei's so\ndiligent,[wait:5] after all.",
             "Chores,[wait:5] practice,[wait:5]\nFountain sealing...",
             "His entire life is homework!",
@@ -128,7 +139,7 @@ function Favorite:getFriendDialogue()
         }
     elseif firstFriend == "kris" then
         return {
-            "Wow![wait:5] What\nhealthy self-esteem!",
+            "Wow![wait:5] What healthy\nself-esteem!",
             "Everyone![wait:5] Let's\nall take a second...",
             "And be our favorite\nfriends to ourselves!",
             {who="ralsei",face="blush_pleased",what="O-[wait:3]okay,[wait:5] I'll try!"},
@@ -140,16 +151,22 @@ function Favorite:getFriendDialogue()
         }
     elseif firstFriend == "dess" then
         return{
+            {anim="hmm"},
             "Kya-huh?[wait:5] That strange scribble...",
             "It almost looks like \na person's name!",
             "Kris,[wait:5] were you\nembarrassed to say?",
+            {anim="idle"},
             "Maybe you should pick\nsomeone else,[wait:5] then.",
+            {anim="lecture"},
             "Good influences are\nimportant,[wait:5] Kris.",
             "Don't give in to the slippery\nslope of peer pressure.",
+            {anim="dark"},
             "Or you might end\nup in a place...",
             "...you can't think\nyour way out of.",
             ".[wait:10].[wait:10].[wait:10]",
-            "Wh-[wait:5] K-[wait:3]Kris![wait:5]\nDon't snarl at your homework!"
+            {anim="fear"},
+            "Wh-[wait:5] K-[wait:3]Kris![wait:5]\nDon't snarl at your homework!",
+            {anim="idle"},
         }
     elseif firstFriend == "december" then
         return{
@@ -158,12 +175,16 @@ function Favorite:getFriendDialogue()
         }
     elseif firstFriend == "berdly" then
         return{
+            {anim="hmm"},
             "...",
             "You wrote fifteen question\nmarks after his name.",
+            {anim="idle"},
             "Well,[wait:5] it's true that...",
             "Berdly's good at\nraising new questions.",
+            {anim="nonplussed"},
             "...completely unrelated\nto the lesson plan.",
             "That we spend the\nnext several hours on.",
+            {anim="idle"},
             "...What a curious\nlittle bluebird!",
             "A pleasure to have\nin class,[wait:5] probably!",
             "Let's all appreciate\nBerdly,[wait:5] okay?",
@@ -171,49 +192,67 @@ function Favorite:getFriendDialogue()
         }
     elseif firstFriend == "jockington" then
         return{
+            {anim="hmm"},
             "...",
+            {anim="lecture"},
             "A+.",
-            "No notes."
+            "No notes.",
+            {anim="idle"},
         }
     elseif firstFriend == "lancer" then
         return{
+            {anim="fear"},
             "Oh,[wait:5] um...",
             {who="susie",face="neutral",what="What?"},
             "I-[wait:5]it's just that,[wait:5] well...",
+            {anim="patient"},
             "Isn't Prince Lancer much\nyounger than you?",
             "And homeschooled?\n[wait:10]By a laptop?",
             "I'm not sure this is\nage-appropriate,[wait:5] is all--",
             {who="susie",face="bangs_neutral",what="Hey."},
             {who="susie",face="bangs_teeth",what="Wanna hear MY answer?"},
+            {anim="fear"},
             "[shake:1]Full score!\n[wait:5]Gold starwalker!!\n[wait:5]Don't smear my ink!!!",
             {who="susie",face="sincere_smile",what="(Hey,[wait:5] Kris,[wait:5] let's play basketball with Lancer later.)"},
+            {anim="idle"},
 
         }
     elseif firstFriend == "asriel" then
         return{
             "It's okay if you miss your brother.\nEveryone else does, too.",
+            {anim="hmm"},
             "Is what I inferred,[wait:5] from\nMiss Alphys's texts.[wait:5] It's\nnot like she ever met him.",
             "Or, asked follow-up\nquestions about him.",
             "It makes me wonder...[wait:5] is he\nreally just like everyone says?",
             "Or is he...",
+            {anim="idle"},
             "[wave]...even cooler? "
         }
     elseif firstFriend == "alphys" then
+        self.jones.alphysFriend = true;
         return{
+            {anim="pain_brief"},
             "Hwuh?[wait:5] Miss Alphys?",
+            {anim="patient"},
             "Kris,[wait:5] the teacher can't\nreally be your friend.",
+            {anim="hmm"},
             "Especially not YOUR teacher.",
+            {anim="dark"},
             "I know she does her best.",
             "But even though she made me\n[wave]\"kool\"[wave:0]  so I could connect to you,",
             "I can tell she has no\nclue how teenagers feel.",
+            {anim="patient"},
             "So you don't have\nto be nice to her.",
+            {anim="idle"},
             "Let's find friends closer\nto your age,[wait:5] okay?"
         }
     elseif firstFriend == "mk" then
         return{
             "Of all the people in class...",
             "MK,[wait:5] more than anyone else...",
+            {anim="hmm"},
             "...sits next to you.",
+            {anim="idle"},
             "I'm glad you appreciate some-\n-one who sits next to you.",
         }
     elseif firstFriend == "snowy" then
@@ -227,47 +266,68 @@ function Favorite:getFriendDialogue()
         return{
             "Catti,[wait:5] Catti,[wait:5] Catti.[wait:5]\n(With three Is.)",
             {what="She's smart,[wait:5] but\nwasting her potential.",react="(Catti has three eyes???)",rx=300,ry=20,reactface="surprise_frown",reactwho="susie"},
+            {anim="scold"},
             "You can't get a\njob in witchcraft!",
             "The market's way\ntoo competitive!",
+            {anim="hmm"},
             "Is that who you're always\ntexting in class,[wait:5] Kris?",
+            {anim="scold"},
             "Someday Miss Alphys will\nconfiscate your phone!",
-            "She just needs\ntwo or three months\nto work up the courage."
+            {anim="patient"},
+            "She just needs\ntwo or three months\nto work up the courage.",
+            {anim="idle"},
         }
     elseif firstFriend == "temmie" then
         return{
             "Always talking about\ncollege,[wait:5] that one.",
             "She'd be a great choice!",
-            "Too bad you're\nlosing to an egg."
+            {anim="hmm"},
+            "Too bad you're\nlosing to an egg.",
+            {anim="idle"},
         }
     elseif firstFriend == "playername" then
         return{
             {who="susie",face="nervous",what="Dunno who that is."},
             {who="susie",face="neutral",what="Do they go to our school?"},
             {who="ralsei",face="angry_surprise",what=".[wait:5].[wait:5].[wait:5]"},
+            {anim="dark"},
             "Kris...",
             "Imaginary friends are\nokay in kindergarten.",
             "But we all have to\ngrow up sometime.",
+            {anim="patient"},
             "You're just you,[wait:5] after all.",
             "So that's why...",
+            {anim="idle"},
             "I can't give you more\nthan partial credit!"
         }
     elseif firstFriend == "jones" then
         return {
+            {anim="static"},
             "...",
             "I'm not giving you\nextra credit for this.",
             "In fact,[wait:5] I'm assigning\nyou six more hours...",
+            {anim="spinny"},
             "Of [wave]Fun Times with\nYour Favorite Jones!!!!!",
             "And also,[wait:5] geography!",
+            {anim="idle"},
         }
     elseif firstFriend == "blank" then
         self.jones.friendless = true;
         return {
+            {anim="scold"},
             "Not even showing your work?",
             "Kris,[wait:5] are you dozing\noff in class again?",
-            "I'm going to have to\nassign you makeup bullets!"
+            "I'm going to have to\nassign you makeup bullets!",
+            {anim="idle"},
         }
     else
-        return {"That person isn't on\nmy class roster.","But I'm sure you're\ngreat friends,[wait:5] probably!","Partial credit!"}
+        return {
+            {anim="hmm"},
+            "That person isn't on\nmy class roster.",
+            {anim="idle"},
+            "But I'm sure you're\ngreat friends,[wait:5] probably!",
+            "Partial credit!"
+        }
     end
 end
 

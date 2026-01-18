@@ -12,5 +12,6 @@ return {
         enemy.dialogue_override = "[shake:2]Kya ha ha ha ha ha ha!!!!!";
         cutscene:text("* Sludge Puddle Jones became [color:#00B3FF]TIRED[color:white].")
         enemy:setTired(true);
+        enemy.text = enemy.pacifyText;
     end
 }

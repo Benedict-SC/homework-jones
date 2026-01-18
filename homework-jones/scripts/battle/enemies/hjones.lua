@@ -14,25 +14,43 @@ function HJones:init()
     self.money = 100
     self.dialogue_offset = {0,10};
 
+    self.mercyThresholds = {27,54,82};
+
     self.TOTAL_CHEW_DIALOGUES = 3;
     self.TOTAL_SLUDGE_DIALOGUES = 11;
-    self.TOTAL_SOLVE_DIALOGUES = 3;
+    self.TOTAL_SOLVE_DIALOGUES = 10;
 
     -- List of possible wave ids, randomly picked each turn
     self.waves = {
-        --"basic"
+        "basic"
         --"favorite",
         --"mathblaster",
         --"multiplechoice",
         --"solow",
-        "mewmew"
+        --"mewmew"
     }
 
-    -- Dialogue randomly displayed in the enemy's speech bubble
     self.dialogue = {
+        "Kya ha ha![wait:5] Solve my\npuzzles and problems!"
+    }
+    -- Dialogue randomly displayed in the enemy's speech bubble
+    self.solveDialogue = {
         "Kya ha ha!",
-        "I'm Homework Jones!",
-        "Solve my puzzles\nand problems!",
+        "No roughhousing,[wait:5] kids!",
+        "The bell doesn't\ndismiss you,[wait:5] my\nKOOL SPINS do!",
+        "The #2 pencil\nis mightier than\nthe #2 sword!",
+        "[POP QUIZ]:[wait:5]\ndefine Fun Times!",
+        "Please spin\nfor the pledge!"
+    }
+    self.sludgeDialogue = {
+        "Soggy, soggy...[wait:5]\nkeh huh huh…",
+        "Why did you\nhave to Be so\nMinus to me?",
+        "They won't let you\neat your teachers\nin college,[wait:5] kids.",
+        "I'm confiscating your\nteeth.[wait:5] Come get them\nin the office tomorrow.",
+        "Do I have to\ncall your parents?[wait:5]\n...do you even\nHAVE parents?"
+    }
+    self.finalSludge = {
+        "KYAAAAA HA HA HA\nHA HA HAAAA!!!"
     }
 
     -- Check text (automatically has "ENEMY NAME - " at the start)
@@ -63,6 +81,27 @@ function HJones:init()
         "* Homework Jones writes your name on the board and circles it.",
         "* Homework Jones looks like an origami dog toy.",
     }
+    self.susieActions = {
+        "* Susie asks for an extension!",
+        "* Susie doodles in the margins!",
+        "* Susie diagrams some swears!"
+    }
+    self.susieBadActions = {
+        "* Susie tries to hide Homework Jones in her bag!",
+        "* Susie guesses it's 'all of the above'!",
+        "* Susie guesses it's 'mitochondria'!",
+    }
+    self.ralseiActions = {
+        "* Ralsei checks your spelling!",
+        "* Ralsei builds a Castle Town diorama!",
+        "* Ralsei gets hooked on phonics!"
+    }
+    self.ralseiBadActions = {
+        "* Ralsei applies tape and gluesticks!",
+        "* Ralsei apologizes profusely!",
+        "* Ralsei sends out a rush order for printer ink!"
+    }
+    
     self.mercyText = { "* Homework Jones reminds you to sign your name on his face." }
     self.pacifyText = { "* Sludge Puddle Jones wants to nap in the teacher's lounge." }
     self.text = self.normalText;
@@ -128,12 +167,21 @@ function HJones:onAct(battler, name)
         self.lastTurnSolved = true;
         Game.battle:startActCutscene("solveforx","solveforx",false,self);
     elseif name == "Standard" then --X-Action
+        local rand = math.random(1,3);
         if battler.chara.id == "ralsei" then
-            -- R-Action text
-            return "* WHOOPS WE FORGOT TO\n* PUT IN THE R-ACTION!!"
+            -- R-Action
+            if self.chewed < 10 then 
+                return self.ralseiActions[rand];
+            else
+                return self.ralseiBadActions[rand];
+            end
         elseif battler.chara.id == "susie" then
-            -- S-Action: start a cutscene (see scripts/battle/cutscenes/dummy.lua)
-            return "* WHOOPS WE FORGOT TO\n* PUT IN THE S-ACTION!!"
+            -- S-Action
+            if self.chewed < 10 then 
+                return self.susieActions[rand];
+            else
+                return self.susieBadActions[rand];
+            end
         else
             -- Text for any other character (like Noelle)
             return "* Well this isn't supposed to happen."
@@ -169,6 +217,15 @@ function HJones:beforeBasicWave(cutscene)
         --do chew warning dialogue
         cutscene:gotoCutscene("warning" .. self.chewDialoguesSeen, "warning" .. self.chewDialoguesSeen,false,self);
     elseif solved then
+        if self.solveDialoguesSeen == 2 and self.wordProblemsGiven < 1 then
+            return;
+        end
+        if self.solveDialoguesSeen == 5 and self.wordProblemsGiven < 2 then
+            return;
+        end
+        if self.solveDialoguesSeen == 8 and self.wordProblemsGiven < 3 then
+            return;
+        end
         self.solveDialoguesSeen = self.solveDialoguesSeen + 1;
         if self.solveDialoguesSeen > self.TOTAL_SOLVE_DIALOGUES then
             return
@@ -180,6 +237,7 @@ end
 function HJones:hurt(amount, battler, on_defeat, color, show_status, attacked)
     self.lastTurnHurt = true;
     self.kindnessInterrupted = true;
+    self.sprite:setAnimation("pain_normal");
     super.hurt(self,amount, battler, on_defeat, color, show_status, attacked)
 end
 function HJones:spin()
@@ -189,6 +247,7 @@ function HJones:spin()
 end
 function HJones:permaPuddle()
     self.text = self.ouchieText;
+    self.dialogue = self.sludgeDialogue;
     Game.battle.music:play("studysession_slow");
     self.dialogue_offset = {0,55};
     self.sprite:setAnimation("puddle");

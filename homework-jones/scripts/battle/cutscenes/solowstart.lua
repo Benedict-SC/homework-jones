@@ -27,15 +27,21 @@ return {
             cutscene:setSpeaker("susie");
             cutscene:text("Hey,[wait:5] hang on.","suspicious");
             cutscene:text("The hell's this question doing in our homework?","angry_b");
+            enemy.sprite:setAnimation("hmm");
             cutscene:battlerText(enemy,"Hwuh?");
             cutscene:text("Dunno what a Solo model is,[wait:5] but I'm pretty sure it's not algebra.","annoyed");
             cutscene:text("Or,[wait:5] uh,[wait:5] anything Alphys taught us.","shy_b");
+            enemy.sprite:setAnimation("lecture");
             cutscene:battlerText(enemy,"You get what you get and\nyou don't get upset,[wait:5] Susie.");
             cutscene:battlerText(enemy,"It's just like my other\npuzzles[wait:3] and...[wait:5] problems[wait:1].[wait:1].[wait:1].");
+            enemy.sprite:setAnimation("nonplussed");
             cutscene:battlerText(enemy,"...");
+            enemy.sprite:setAnimation("fear");
             cutscene:battlerText(enemy,"This is,[wait:5] uh,[wait:5] from a\npostgrad textbook.");
             cutscene:battlerText(enemy,"...");
+            enemy.sprite:setAnimation("scold");
             cutscene:battlerText(enemy,"...don't look at me like\nthat![wait:5] Blame Miss Alphys!!");
+            enemy.sprite:setAnimation("idle");
         end
     end
 }

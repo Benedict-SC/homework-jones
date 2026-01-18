@@ -4,21 +4,23 @@ return {
     ---@param enemy EnemyBattler
     checkmercyaftersolve = function(cutscene, battler, enemy)
 
-            if enemy.mercy >= 27 and enemy.wordProblemsGiven == 0 then
+            if enemy.mercy >= enemy.mercyThresholds[1] and enemy.wordProblemsGiven == 0 then
                 cutscene:text("* Homework Jones's face opens to reveal an essay question!");
                 enemy.wave_override = "favorite";
                 enemy.dialogue_override = "Now,[wait:5] let's get excited\nabout LONG ANSWER!"
                 enemy.wordProblemsGiven = 1;
-            elseif enemy.mercy >= 54 and enemy.wordProblemsGiven == 1 then
+            elseif enemy.mercy >= enemy.mercyThresholds[2] and enemy.wordProblemsGiven == 1 then
                 cutscene:text("* Homework Jones's face opens to reveal a word problem!");
                 enemy.wave_override = "solow";
                 enemy.dialogue_override = "Let's do the next one!"
                 enemy.wordProblemsGiven = 2;
-            elseif enemy.mercy >= 81 and enemy.wordProblemsGiven == 2 then
+            elseif enemy.mercy >= enemy.mercyThresholds[3] and enemy.wordProblemsGiven == 2 then
                 cutscene:text("* Homework Jones's face opens to reveal a word problem!");
-                cutscene:text("* ...but not really, 'cause we haven't implemented this one yet!");
-                --TODO: initiate wordproblem 3
+                enemy.wave_override = "mewmew";
                 enemy.wordProblemsGiven = 3;
+            end
+            if enemy.mercy >= 100 then
+                enemy.text = enemy.mercyText;
             end
             enemy:beforeBasicWave(cutscene);
     end

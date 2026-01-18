@@ -39,10 +39,10 @@ MultipleChoice.questions = {
         rowOffsets={20,0}
     },{
         question="What is your group project about?",
-        a="",
-        b="",
-        c="",
-        d="",
+        a="       ",
+        b="       ",
+        c="       ",
+        d="       ",
         wrongs={},
         answerSize=20,
         rowOffsets={20,0}

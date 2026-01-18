@@ -5,6 +5,7 @@ return {
     ---@param cutscene BattleCutscene
     presolve3 = function(cutscene,battler,enemy)
         cutscene:battlerText(enemy,"Having problems?[wait:5] Make\nthem word problems!");
-        cutscene:battlerText(enemy,"And you can't get cyberbullied\non Charlotte's Web! Kya-ha-ha!");
+        cutscene:battlerText(enemy,"And you can't get\ncyberbullied on\nCharlotte's Web!");
+        enemy.dialogue_override = "Now,[wait:5] let's get excited\nabout LONG ANSWER!";
     end
 }

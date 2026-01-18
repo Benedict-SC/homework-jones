@@ -1,10 +1,11 @@
 return {
     ---@param cutscene BattleCutscene
     warning1 = function(cutscene,battler,enemy)
+        self.dialogue = self.solveDialogue;
         enemy.sprite:setAnimation("fear");
         cutscene:battlerText(enemy,"I,[wait:5] uh,[wait:5] guess that's a\nGood Star for enthusiasm!");
         cutscene:battlerText(enemy,"But you're not supposed\nto be so hungry for\nknowledge that you...");
-        enemy.sprite:setAnimation("nonplussed");
+        enemy.sprite:setAnimation("patient");
         cutscene:battlerText(enemy,"Eat...[wait:5] my body.");
         enemy.sprite:setAnimation("lecture");
         cutscene:battlerText(enemy,"Studies show,[wait:5] learning\nretention is much higher\nwhen you read words!");
