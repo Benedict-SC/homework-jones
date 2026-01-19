@@ -4,7 +4,7 @@ function HJones:init()
     super.init(self)
 
     -- Text displayed at the bottom of the screen at the start of the encounter
-    self.text = "* Solve my puzzles and problems!"
+    self.text = "* Solve his puzzles and problems!"
 
     -- Battle music ("battle" is rude buster)
     self.music = "studysession"
@@ -13,6 +13,12 @@ function HJones:init()
 
     -- Add the dummy enemy to the encounter
     self:addEnemy("hjones")
+end
+function HJones:onActionsEnd()
+    if (not (self.someoneActed or self.someoneAttacked)) and not self.rouxlsShowedUp then
+        self.rouxlsShowedUp = true;
+        return Game.battle:startCutscene("rouxls","rouxls",Game.battle.enemies[1]);
+    end
 end
 
 return HJones

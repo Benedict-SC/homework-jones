@@ -3,6 +3,7 @@ local HJones, super = Class(EnemyBattler)
 function HJones:init()
     super.init(self)
     self.name = "Homework Jones"
+    self.timer = Timer();
 
     -- Sets the actor, which handles the enemy's sprites (see scripts/data/actors/dummy.lua)
     self:setActor("homework")
@@ -22,10 +23,10 @@ function HJones:init()
 
     -- List of possible wave ids, randomly picked each turn
     self.waves = {
-        "basic"
+        --"basic"
         --"favorite",
-        --"mathblaster",
-        --"multiplechoice",
+        "mathblaster",
+        "multiplechoice",
         --"solow",
         --"mewmew"
     }
@@ -135,6 +136,7 @@ function HJones:update()
     return super.update(self)
 end
 function HJones:onAct(battler, name)
+    Game.battle.encounter.someoneActed = true;
     if name == "EatHW" then
         self.lastTurnChewed = true;
         if self.solveDialoguesSeen == 3 then
@@ -235,6 +237,7 @@ function HJones:beforeBasicWave(cutscene)
     end
 end
 function HJones:hurt(amount, battler, on_defeat, color, show_status, attacked)
+    Game.battle.encounter.someoneAttacked = true;
     self.lastTurnHurt = true;
     self.kindnessInterrupted = true;
     self.sprite:setAnimation("pain_normal");
@@ -255,5 +258,9 @@ function HJones:permaPuddle()
     self.sprite.setAnimation = function(self)
         --do nothing- he's stuck like this
     end
+end
+function HJones:onTurnStart()
+    Game.battle.encounter.someoneActed = false;
+    Game.battle.encounter.someoneAttacked = false;
 end
 return HJones
