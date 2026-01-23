@@ -25,10 +25,10 @@ function HJones:init()
     self.waves = {
         --"basic"
         --"favorite",
-        "mathblaster",
-        "multiplechoice",
+        --"mathblaster",
+        --"multiplechoice",
         --"solow",
-        --"mewmew"
+        "mewmew"
     }
 
     self.dialogue = {
@@ -123,10 +123,10 @@ function HJones:init()
     self.lastSpinTime = Kristal.getTime();
     self.spinDelay = 6;
 
-    self:registerAct("EatHW")
-    self:registerAct("EatHWX","",{"susie"})
     self:registerAct("Solve")
     self:registerAct("SolveForX", "", {"ralsei"})
+    self:registerAct("EatHW")
+    self:registerAct("EatHWX","",{"susie"})
 end
 function HJones:update()
     local freestate = Game.battle.state == "MENUSELECT" or Game.battle.state == "ENEMYSELECT" or Game.battle.state == "PARTYSELECT" or Game.battle.state == "ACTIONSELECT"

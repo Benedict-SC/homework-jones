@@ -15,7 +15,7 @@ function HJones:init()
     self:addEnemy("hjones")
 end
 function HJones:onActionsEnd()
-    if (not (self.someoneActed or self.someoneAttacked)) and not self.rouxlsShowedUp then
+    if (not (self.someoneActed or self.someoneAttacked)) and (not self.rouxlsShowedUp) and Game.battle.enemies[1] and Game.battle.enemies[1].mercy < 100 then
         self.rouxlsShowedUp = true;
         return Game.battle:startCutscene("rouxls","rouxls",Game.battle.enemies[1]);
     end

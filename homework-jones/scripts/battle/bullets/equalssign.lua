@@ -24,7 +24,13 @@ end
 function EqualsSign:wiggle()
     self.wiggling = true;
     self.parent.timer:after(0.8,function() 
-        self:snap();
+        local ty = self.top.y + self.y;
+        local by = self.bottom.y + 4 + self.y;
+        if Game.battle.soul.y > ty and Game.battle.soul.y < by then
+            self:snap();
+        else
+            self:antiSnap();
+        end
     end);
 end
 function EqualsSign:snap()
@@ -45,6 +51,27 @@ function EqualsSign:snap()
             self.topcoll.y = 0 + num;
             self.bottom.y = 0 - num;
             self.bottomcoll.y = 26 - num;
+        end,"linear");
+    end)
+end
+function EqualsSign:antiSnap()
+    self.wiggling = false;
+        self.top.x = 0;
+        self.topcoll.x = 0;
+        self.bottom.x = 0;
+        self.bottomcoll.x = 0;
+    self.parent.timer:approach(0.3,0,30,function(num)
+        self.top.y = -26 - num;
+        self.topcoll.y = 0 - num;
+        self.bottom.y = 0 + num;
+        self.bottomcoll.y = 26 + num;
+    end,"in-cubic",function() 
+        --Assets.playSound("grab");
+        self.parent.timer:approach(2,30,0,function(num)
+            self.top.y = -26 - num;
+            self.topcoll.y = 0 - num;
+            self.bottom.y = 0 + num;
+            self.bottomcoll.y = 26 + num;
         end,"linear");
     end)
 end

@@ -81,7 +81,7 @@ return {
                 Game.battle:addChild(blast);
             end);
         end);
-        cutscene:text("[noskip]Yes, I hath magnaimously decided to[next]","closed");
+        cutscene:text("[noskip]Yes, I hath magnanimously decided to[next]","closed");
         Game.battle.music:stop();
         Game.battle.timer:approach(1,512,700,function(num)
             rouxls.x = num;

@@ -107,7 +107,12 @@ function MultipleChoice:illegibilize(text)
         local char = text:sub(i,i);
         local rn = math.random(1,100);
         if rn < percent then
-            char = " ";
+            local rn2 = math.random(1,100);
+            if rn2 < 20 then
+                char = " ";
+            else
+                char = "[color:#444444]" .. char .. "[color:white]"
+            end
         end
         rn = math.random(1,100);
         if rn < percent then

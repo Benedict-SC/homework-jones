@@ -19,7 +19,7 @@ function MewMew:onStart()
     --self:setSoulPosition(SCREEN_WIDTH / 2,250);
     --self:setArenaOffset(0,80);
     self:moveArena();
-    self.questionText = Text("Essay question 3:\nWhich Mew Mew Kissy Cutie is the best? (MMKC3: Gaiden is noncanonical and does not count as a main series entry.)",160,50,340,nil,{align="center"});
+    self.questionText = Text("Essay question 3:\nWhich Mew Mew Kissy Cutie is the best? (MMKC3: Gaiden is noncanonical and does not count as a main series entry.)",160,10,340,nil,{align="center"});
     Game.battle:addChild(self.questionText);
     
 end
@@ -43,6 +43,20 @@ end
 function MewMew:startTyping()
     self.instructionText = Text("Type your answer\n[wave]vv[wave:0]       with the keyboard! [wave]vv[wave:0]",-110,285,nil,nil,{color={0.5,0.5,0.5},align="center",font_size=18});
     Game.battle:addChild(self.instructionText);
+            self.readtime = 9;
+            self.timerFrame = Rectangle(216,219,207,10);
+            self.timerFrame:setColor(1,1,1);
+            self.timerExpended = Rectangle(421,220,1,8);
+            self.timerExpended:setColor(0,0,0)
+            Game.battle:addChild(self.timerFrame);
+            Game.battle:addChild(self.timerExpended);
+            local startedAt = 0;
+            self.timer:approach(self.readtime,0,self.readtime,function(num) 
+                local expendedPercent = num / 9;
+                local prog = math.floor(expendedPercent * 205);
+                self.timerExpended.width = prog;
+                self.timerExpended.x = 422 - prog;
+            end)
     self.mewState = "TYPING";
     TextInput.attachInput(self.input,{
         enter_submits = false,
@@ -56,6 +70,8 @@ function MewMew:startTyping()
 end
 function MewMew:restoreArena()
     self.questionText:remove();
+    self.timerFrame:remove();
+    self.timerExpended:remove();
     self.timer:approach(0.29,Game.battle.arena.y,Game.battle.arena.y - 100,function(num) 
         local dist = num - Game.battle.arena.y;
         Game.battle.arena.y = num;

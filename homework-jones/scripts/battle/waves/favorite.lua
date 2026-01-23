@@ -14,6 +14,20 @@ function Favorite:onStart()
     Game.battle:addChild(self.questionText);
     self.instructionText = Text("Type your answer\n[wave]vv[wave:0]       with the keyboard! [wave]vv[wave:0]",-110,285,nil,nil,{color={0.5,0.5,0.5},align="center",font_size=18});
     Game.battle:addChild(self.instructionText);
+            self.readtime = 10;
+            self.timerFrame = Rectangle(216,209,207,10);
+            self.timerFrame:setColor(1,1,1);
+            self.timerExpended = Rectangle(421,210,1,8);
+            self.timerExpended:setColor(0,0,0)
+            Game.battle:addChild(self.timerFrame);
+            Game.battle:addChild(self.timerExpended);
+            local startedAt = 0;
+            self.timer:during(self.readtime-startedAt,function() 
+                local expendedPercent = (Game.battle.wave_timer - startedAt) / (self.readtime - startedAt);
+                local prog = math.floor(expendedPercent * 205);
+                self.timerExpended.width = prog;
+                self.timerExpended.x = 422 - prog;
+            end)
     TextInput.attachInput(self.input,{
         enter_submits = false,
         multiline = false,
@@ -343,6 +357,8 @@ function Favorite:onEnd()
    local dialogue = self:getFriendDialogue();
    self.questionText:remove();
    self.instructionText:remove();
+   self.timerFrame:remove();
+   self.timerExpended:remove();
    Game.battle:startCutscene("favoritefriend", "favoriteFriend",self:getAttackers()[1],dialogue);
 end
 
