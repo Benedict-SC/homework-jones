@@ -20,7 +20,7 @@ return {
                 enemy.wordProblemsGiven = 3;
             end
             if enemy.mercy >= 100 then
-                enemy.text = enemy.mercyText;
+                enemy.text = enemy.spareable_text;
             end
             enemy:beforeBasicWave(cutscene);
     end

@@ -25,10 +25,10 @@ function HJones:init()
     self.waves = {
         --"basic"
         --"favorite",
-        --"mathblaster",
-        --"multiplechoice",
+        "mathblaster",
+        "multiplechoice",
         --"solow",
-        "mewmew"
+        --"mewmew"
     }
 
     self.dialogue = {
@@ -103,8 +103,8 @@ function HJones:init()
         "* Ralsei sends out a rush order for printer ink!"
     }
     
-    self.mercyText = { "* Homework Jones reminds you to sign your name on his face." }
-    self.pacifyText = { "* Sludge Puddle Jones wants to nap in the teacher's lounge." }
+    self.spareable_text = { "* Homework Jones reminds you to sign your name on his face." }
+    self.tired_text = { "* Sludge Puddle Jones wants to nap in the teacher's lounge." }
     self.text = self.normalText;
     -- Text displayed at the bottom of the screen when the enemy has low health
     self.low_health_text = "* Shred Jones isn't as cool as his name sounds."

@@ -356,7 +356,7 @@ function MultipleChoice:explode(letter)
         ex = 356;
         ey = 247;
     end
-    local bullet = self:spawnBullet("cannonblast",ex,ey);
+    local bullet = self:spawnBullet("cannonblast",ex,ey,self.q);
     bullet:setScale(0.1,0.1);
     self.timer:approach(0.2,0.1,1,function(num)
         bullet:setScale(num);
