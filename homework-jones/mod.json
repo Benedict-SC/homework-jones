@@ -17,10 +17,10 @@
     "chapter": 2,
 
     // The map that you start in when first starting the mod.
-    "map": "room1",
+    "map": "school",
 
     // The party. The first character is the player.
-    "party": ["kris", "susie", "ralsei"],
+    "party": ["kris", "susie"],
 
     // The inventory. Contains three darkburgers, a cell phone and a shadow crystal by default.
     "inventory": {
@@ -32,15 +32,11 @@
     "equipment": {
         "kris": {
             "weapon": "wood_blade",
-            "armor": ["amber_card", "amber_card"]
+            "armor": ["amber_card"]
         },
         "susie": {
             "weapon": "mane_ax",
-            "armor": ["amber_card", "amber_card"]
-        },
-        "ralsei": {
-            "weapon": "red_scarf",
-            "armor": ["amber_card", "amber_card"]
+            "armor": ["amber_card"]
         }
     },
 

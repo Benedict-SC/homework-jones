@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="17" height="14" tilewidth="40" tileheight="40" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="17" height="14" tilewidth="40" tileheight="40" infinite="0" nextlayerid="7" nextobjectid="8">
+ <editorsettings>
+  <export target="school.lua" format="lua"/>
+ </editorsettings>
+ <properties>
+  <property name="light" type="bool" value="true"/>
+ </properties>
  <tileset firstgid="1" source="../tilesets/castle.tsx"/>
  <tileset firstgid="41" source="../tilesets/school.tsx"/>
  <layer id="1" name="Tile Layer 1" width="17" height="14">
@@ -38,4 +44,24 @@
 0,0,0,0,0,0,0,57,57,57,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup color="#1a5fb4" id="3" name="collision">
+  <object id="1" x="-5.23748" y="361.386" width="284.57" height="206.008"/>
+  <object id="2" x="399" y="361" width="332" height="230"/>
+  <object id="3" x="-7" y="-18" width="703" height="296"/>
+  <object id="4" x="676" y="259" width="48" height="114"/>
+  <object id="5" x="-21" y="251" width="24" height="124"/>
+ </objectgroup>
+ <objectgroup color="#c061cb" id="4" name="markers">
+  <object id="6" name="spawn" x="378" y="349">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="events"/>
+ <objectgroup id="6" name="objects">
+  <object id="7" name="script" x="205" y="232" width="268" height="185" visible="0">
+   <properties>
+    <property name="cutscene" value="startgame.go"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
