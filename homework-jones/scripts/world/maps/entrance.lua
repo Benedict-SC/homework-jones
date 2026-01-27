@@ -10,7 +10,7 @@ return {
   tilewidth = 40,
   tileheight = 40,
   nextlayerid = 5,
-  nextobjectid = 12,
+  nextobjectid = 14,
   properties = {},
   tilesets = {
     {
@@ -86,6 +86,22 @@ return {
           visible = true,
           properties = {
             ["cutscene"] = "landing.go"
+          }
+        },
+        {
+          id = 13,
+          name = "enemy",
+          type = "",
+          shape = "rectangle",
+          x = 825.394,
+          y = 74.409,
+          width = 40,
+          height = 40,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["actor"] = "homework",
+            ["encounter"] = "hjones"
           }
         }
       }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="16" height="12" tilewidth="40" tileheight="40" infinite="0" nextlayerid="5" nextobjectid="12">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="16" height="12" tilewidth="40" tileheight="40" infinite="0" nextlayerid="5" nextobjectid="14">
  <editorsettings>
   <export target="entrance.lua" format="lua"/>
  </editorsettings>
@@ -25,6 +25,12 @@
   <object id="11" name="script" x="311.225" y="182.759" width="214.111" height="207.229">
    <properties>
     <property name="cutscene" value="landing.go"/>
+   </properties>
+  </object>
+  <object id="13" name="enemy" x="825.394" y="74.409" width="40" height="40">
+   <properties>
+    <property name="actor" value="homework"/>
+    <property name="encounter" value="hjones"/>
    </properties>
   </object>
  </objectgroup>
