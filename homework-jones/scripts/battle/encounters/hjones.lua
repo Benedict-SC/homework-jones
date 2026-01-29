@@ -20,5 +20,8 @@ function HJones:onActionsEnd()
         return Game.battle:startCutscene("rouxls","rouxls",Game.battle.enemies[1]);
     end
 end
+--function HJones:onBattleEnd()
+--    Game.world:startCutscene("postbattle","postbattle");
+--end
 
 return HJones

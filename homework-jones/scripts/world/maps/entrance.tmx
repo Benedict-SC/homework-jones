@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="16" height="12" tilewidth="40" tileheight="40" infinite="0" nextlayerid="5" nextobjectid="14">
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="16" height="12" tilewidth="40" tileheight="40" infinite="0" nextlayerid="5" nextobjectid="16">
  <editorsettings>
   <export target="entrance.lua" format="lua"/>
  </editorsettings>
@@ -21,19 +21,6 @@
 11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11
 </data>
  </layer>
- <objectgroup id="4" name="objects">
-  <object id="11" name="script" x="311.225" y="182.759" width="214.111" height="207.229">
-   <properties>
-    <property name="cutscene" value="landing.go"/>
-   </properties>
-  </object>
-  <object id="13" name="enemy" x="825.394" y="74.409" width="40" height="40">
-   <properties>
-    <property name="actor" value="homework"/>
-    <property name="encounter" value="hjones"/>
-   </properties>
-  </object>
- </objectgroup>
  <layer id="2" name="Tile Layer 2" width="16" height="12">
   <data encoding="csv">
 0,0,0,0,0,71,0,0,0,0,73,0,0,0,0,0,
@@ -50,7 +37,26 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup color="#0018f5" id="3" name="Collision">
+ <objectgroup id="4" name="objects">
+  <object id="11" name="script" x="311.225" y="182.759" width="214.111" height="207.229">
+   <properties>
+    <property name="cutscene" value="landing.go"/>
+   </properties>
+  </object>
+  <object id="14" name="npc" x="308.966" y="-38.7175">
+   <properties>
+    <property name="actor" value="ralsei"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="15" name="npc" x="849.462" y="187.393">
+   <properties>
+    <property name="actor" value="homework"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#0018f5" id="3" name="collision">
   <object id="1" x="146.352" y="1.5487" width="54.9788" height="159.516"/>
   <object id="2" x="107.635" y="153.321" width="54.2045" height="49.5584"/>
   <object id="3" x="70.4658" y="184.295" width="51.1071" height="192.813"/>

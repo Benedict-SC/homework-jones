@@ -4,8 +4,8 @@ return {
         --local enemy = Game.battle.attackers[1]
         cutscene:text("* You offered to eat Susie's homework for her.");
         cutscene:setSpeaker("susie");
-        cutscene:text(".[wait:5].[wait:5].","suspicious");
-        cutscene:text("Then I gotta eat yours too.[wait:5] Fair's fair,[wait:5] right?","sincere",{reactions= { {
+        cutscene:text("* .[wait:5].[wait:5].","suspicious");
+        cutscene:text("* Then I gotta eat yours too.[wait:5] Fair's fair,[wait:5] right?","sincere",{reactions= { {
                     "Why that face?",400,55,"shock_smile","ralsei"
                 }}});
         cutscene:setSpeaker(nil);

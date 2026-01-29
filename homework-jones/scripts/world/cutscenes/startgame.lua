@@ -15,7 +15,14 @@ return {
         susie.x = kris.x - 55;
         cutscene:wait(1);
             cutscene:setSpeaker(susie)
-            cutscene:text("Kris get the banana","smile")
+            cutscene:text("* I know what you're thinking.","bangs_neutral")
+            cutscene:text("* 'This idea rules.'","bangs_smile")
+            cutscene:text("* 'And Susie's brain is huge enough to crush a city.'","closed_grin")
+            susie.sprite:set("look_up");
+            cutscene:text("* And you know what?","closed_grin")
+            susie.sprite:set("walk/right");
+            cutscene:text("* You're right.","smile")
+            cutscene:text("* Let's do this.","teeth_b")
 
             kris.visible = false;
             susie.visible = false;

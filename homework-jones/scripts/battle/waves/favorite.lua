@@ -3,8 +3,6 @@ local Favorite, super = Class(Wave)
 function Favorite:onStart()
     self.time = 10;
     self.jones = self:getAttackers()[1];
-    self.testtext = "this is a bunch of text that we're going to attempt to write out into the textbox"
-    self.testprog = 1;
     self.input = {""}
     self:setArenaSize(30,30);
     --self:setSoulPosition(SCREEN_WIDTH / 2,250);
@@ -33,11 +31,6 @@ function Favorite:onStart()
         multiline = false,
         clear_after_submit = false
     });
-    --Game.battle:battleText("start");
-    --[[self.timer:every(1/3, function()
-        self.testprog = self.testprog + 1;
-        Game.battle.battle_ui.encounter_text.text:setText("[instant]" .. string.sub(self.testtext,1,self.testprog));
-    end)]]
 end
 
 function Favorite:moveArena()
@@ -115,7 +108,7 @@ function Favorite:getFriendDialogue()
         }
     elseif firstFriend == "susie" then
         return {
-            {who="susie",face="surprise_frown",what="Wait,[wait:5] huh?"},
+            {who="susie",face="surprise_frown",what="* Wait,[wait:5] huh?"},
             "You've been helping\nher out,[wait:5] huh?",
             "Normally,[wait:5] Susie[wait:5] \n\"forgets\"[wait:5] her work.",
             {anim="nonplussed"},
@@ -129,14 +122,14 @@ function Favorite:getFriendDialogue()
             "But you're doing\nyour best,[wait:5] Kris.",
             "Maybe she'll learn\nyour positive attitude.",
             "Then you can\nBe Plus together!",
-            {who="susie",face="nervous_side",what="...[wait:20]"},
-            {who="susie",face="smile",what="You and Ralsei really are total nerds."},
-            {who="susie",face="teeth_smile",what="If you turn me into one too,[wait:5] I'm confiscating your face."},
-            {who="susie",face="teeth_b",what="Got it!?"}
+            {who="susie",face="nervous_side",what="* ...[wait:20]"},
+            {who="susie",face="smile",what="* You and Ralsei really are total nerds."},
+            {who="susie",face="teeth_smile",what="* If you turn me into one too,[wait:5] I'm confiscating your face."},
+            {who="susie",face="teeth_b",what="* Got it!?"}
         }
     elseif firstFriend == "ralsei" then
         return {
-            {who="ralsei",face="blush_surprise",what="O-[wait:3]oh!"},
+            {who="ralsei",face="blush_surprise",what="* O-[wait:3]oh!"},
             {anim="lecture"},
             "Full marks,[wait:5] Kris!",
             {anim="idle"},
@@ -145,23 +138,23 @@ function Favorite:getFriendDialogue()
             "His entire life is homework!",
             "But be sure to take\nplenty of study breaks.",
             "(That means,[wait:5] breaks,[wait:5]\nto study in.)",
-            {who="ralsei",face="blush",what="(Kris,[wait:5] I'm happy you care about me.)"},
-            {who="ralsei",face="pensive",what="(But are you sure I'm your favorite?)"},
-            {who="ralsei",face="small_smile_side",what="(Susie is here,[wait:5] after all.)"},
-            {who="ralsei",face="smile_b",what="(Between the two of us...)"},
-            {who="ralsei",face="roaring",what="(I'm not sure I'm the best choice.)"}
+            {who="ralsei",face="blush",what="* (Kris,[wait:5] I'm happy you care about me.)"},
+            {who="ralsei",face="pensive",what="* (But are you sure I'm your favorite?)"},
+            {who="ralsei",face="small_smile_side",what="* (Susie is here,[wait:5] after all.)"},
+            {who="ralsei",face="smile_b",what="* (Between the two of us...)"},
+            {who="ralsei",face="roaring",what="* (I'm not sure I'm the best choice.)"}
         }
     elseif firstFriend == "kris" then
         return {
             "Wow![wait:5] What healthy\nself-esteem!",
             "Everyone![wait:5] Let's\nall take a second...",
             "And be our favorite\nfriends to ourselves!",
-            {who="ralsei",face="blush_pleased",what="O-[wait:3]okay,[wait:5] I'll try!"},
-            {who="susie",face="smile",what="Can't lend myself five bucks for lunch,[wait:5] dumbass."},
-            {who="susie",face="surprise",what="Unless I left it in my pockets and forgot."},
-            {who="susie",face="annoyed_down",what=".[wait:5].[wait:5].[wait:5]"},
-            {who="susie",face="teeth",what="...dammit, nothing."},
-            {who="ralsei",face="blush_pleased",what="(Kris,[wait:5] can I,[wait:5] um...[wait:10] copy your answers?)"},
+            {who="ralsei",face="blush_pleased",what="* O-[wait:3]okay,[wait:5] I'll try!"},
+            {who="susie",face="smile",what="* Can't lend myself five bucks for lunch,[wait:5] dumbass."},
+            {who="susie",face="surprise",what="* Unless I left it in my pockets and forgot."},
+            {who="susie",face="annoyed_down",what="* .[wait:5].[wait:5].[wait:5]"},
+            {who="susie",face="teeth",what="* ...dammit, nothing."},
+            {who="ralsei",face="blush_pleased",what="* (Kris,[wait:5] can I,[wait:5] um...[wait:10] copy your answers?)"},
         }
     elseif firstFriend == "dess" then
         return{
@@ -217,17 +210,17 @@ function Favorite:getFriendDialogue()
         return{
             {anim="fear"},
             "Oh,[wait:5] um...",
-            {who="susie",face="neutral",what="What?"},
+            {who="susie",face="neutral",what="* What?"},
             "I-[wait:5]it's just that,[wait:5] well...",
             {anim="patient"},
             "Isn't Prince Lancer much\nyounger than you?",
             "And homeschooled?\n[wait:10]By a laptop?",
             "I'm not sure this is\nage-appropriate,[wait:5] is all--",
-            {who="susie",face="bangs_neutral",what="Hey."},
-            {who="susie",face="bangs_teeth",what="Wanna hear MY answer?"},
+            {who="susie",face="bangs_neutral",what="* Hey."},
+            {who="susie",face="bangs_teeth",what="* Wanna hear MY answer?"},
             {anim="fear"},
             "[shake:1]Full score!\n[wait:5]Gold starwalker!!\n[wait:5]Don't smear my ink!!!",
-            {who="susie",face="sincere_smile",what="(Hey,[wait:5] Kris,[wait:5] let's play basketball with Lancer later.)"},
+            {who="susie",face="sincere_smile",what="* (Hey,[wait:5] Kris,[wait:5] let's play basketball with Lancer later.)"},
             {anim="idle"},
 
         }
@@ -301,9 +294,9 @@ function Favorite:getFriendDialogue()
         }
     elseif firstFriend == "playername" then
         return{
-            {who="susie",face="nervous",what="Dunno who that is."},
-            {who="susie",face="neutral",what="Do they go to our school?"},
-            {who="ralsei",face="angry_surprise",what=".[wait:5].[wait:5].[wait:5]"},
+            {who="susie",face="nervous",what="* Dunno who that is."},
+            {who="susie",face="neutral",what="* Do they go to our school?"},
+            {who="ralsei",face="angry_surprise",what="* .[wait:5].[wait:5].[wait:5]"},
             {anim="dark"},
             "Kris...",
             "Imaginary friends are\nokay in kindergarten.",

@@ -9,7 +9,7 @@ return {
                 cutscene:text("* But the paper was too soggy.");
                 cutscene:text("* A disgusting mash got stuck on Ralsei's claws.");
                 cutscene:setSpeaker("ralsei");
-                cutscene:text("M-[wait:3]Mr. Jones,[wait:5] can I wash my hands,[wait:5] please?","shock");
+                cutscene:text("* M-[wait:3]Mr. Jones,[wait:5] can I wash my hands,[wait:5] please?","shock");
                 enemy.sprite:setAnimation("hmm");
                 cutscene:battlerText(enemy,"I don't know,[wait:5] Prince,[wait:5][wave]CAN[wave:0] you?");
                 enemy.sprite:setAnimation("idle");
@@ -24,7 +24,7 @@ return {
             if not enemy.solveForXPicked then   
                 enemy.solveForXPicked = true;
                 cutscene:setSpeaker("ralsei");
-                cutscene:text("Kris?[wait:5] You...[wait:8] want to do homework...[wait:8] together?[react:1]","blush_shy",{reactions= { {
+                cutscene:text("* Kris?[wait:5] You...[wait:8] want to do homework...[wait:8] together?[react:1]","blush_shy",{reactions= { {
                     "Uh, you're blushing.",400,55,"nervous","susie"
                 }}});
                 cutscene:setSpeaker(nil);

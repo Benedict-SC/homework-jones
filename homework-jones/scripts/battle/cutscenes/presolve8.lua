@@ -2,8 +2,8 @@ return {
     ---@param cutscene BattleCutscene
     presolve8 = function(cutscene,battler,enemy)
         cutscene:setSpeaker("ralsei");
-        cutscene:text("Well, what DO you know about economics, Mr. Jones?","pleased")
-        cutscene:text("It's not often Susie takes\nan interest in her education![react:1]","small_smile_side",{reactions= { {
+        cutscene:text("* Well, what DO you know about economics, Mr. Jones?","pleased")
+        cutscene:text("* It's not often Susie takes\nan interest in her education![react:1]","small_smile_side",{reactions= { {
                     "NOT what's\nhappening.",400,55,"teeth","susie"
         }}});
         cutscene:battlerText(enemy,"Well!");
@@ -14,8 +14,8 @@ return {
         enemy.sprite:setAnimation("nonplussed");
         cutscene:battlerText(enemy,"Teach you...[wait:7]\nanything?");
         cutscene:setSpeaker("susie");
-        cutscene:text("Yeah, Alphys can't handle me either.","closed_grin");
-        cutscene:text("Guess that's nothing new, heh.","nervous");
+        cutscene:text("* Yeah,[wait:5] Alphys can't handle me either.","closed_grin");
+        cutscene:text("* Guess that's nothing new,[wait:5] heh.","nervous");
         enemy.sprite:setAnimation("fear");
         cutscene:battlerText(enemy,"B-[wait:2]b-[wait:2]but, it's my job!\nMy purpose as a Darkner!");
         enemy.sprite:setAnimation("hmm");

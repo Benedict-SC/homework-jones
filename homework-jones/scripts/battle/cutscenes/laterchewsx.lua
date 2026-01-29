@@ -8,10 +8,10 @@ return {
         if enemy.chewed >= 14 then
             if enemy.tired then
                 cutscene:setSpeaker("susie");
-                cutscene:text("Kris, uh...","suspicious")
-                cutscene:text("...let's just have Ralsei put him to sleep and go get some moss, okay?","sus_nervous")
+                cutscene:text("* Kris,[wait:5] uh...","suspicious")
+                cutscene:text("* ...let's just have Ralsei sleep him and go get some moss,[wait:5] okay?","sus_nervous")
                 cutscene:battlerText(enemy,"Do it![wait:5] Turn me\ninto calories![wait:5] Give\nme meaning,[wait:3] Susie!!!")
-                cutscene:text("Let's go get some moss right now, actually.","surprise_frown")
+                cutscene:text("* Let's go get some moss right now,[wait:5] actually.","surprise_frown")
             elseif enemy.susieNoThanks then
                 cutscene:text("* Susie doesn't want to\neat any more Jones.[react:1]",nil,{reactions= { {
                     "(Is this\ncannibalism???)",400,45,"shock_nervous","susie"

@@ -8,10 +8,11 @@ function HJones:init()
     -- Sets the actor, which handles the enemy's sprites (see scripts/data/actors/dummy.lua)
     self:setActor("homework")
 
-    self.max_health = 4000
-    self.health = 4000
-    self.attack = 11
-    self.defense = 0
+    self.max_health = 1000
+    self.health = 1000
+    self.attack = 10
+    self.defense = 25
+    self.tired_percentage = 0.15
     self.money = 100
     self.dialogue_offset = {0,10};
 
@@ -55,7 +56,7 @@ function HJones:init()
     }
 
     -- Check text (automatically has "ENEMY NAME - " at the start)
-    self.check = "AT 11 DF 0\n"..
+    self.check = "AT 10 DF 25\n"..
         "* Miss Alphys has created a\n"..
         "monster. I mean Darkner."
 
@@ -127,6 +128,9 @@ function HJones:init()
     self:registerAct("SolveForX", "", {"ralsei"})
     self:registerAct("EatHW")
     self:registerAct("EatHWX","",{"susie"})
+
+    --DEBUG: REMOVE
+    --self.mercy = 100;
 end
 function HJones:update()
     local freestate = Game.battle.state == "MENUSELECT" or Game.battle.state == "ENEMYSELECT" or Game.battle.state == "PARTYSELECT" or Game.battle.state == "ACTIONSELECT"
@@ -262,5 +266,19 @@ end
 function HJones:onTurnStart()
     Game.battle.encounter.someoneActed = false;
     Game.battle.encounter.someoneAttacked = false;
+end
+function HJones:onSpared()
+    Game.battle.music:stop();
+    if self.mercy >= 100 then
+        Game.jonesOutcome = "happy"
+    elseif self.tired then
+        if self.fullyChewed then
+            Game.jonesOutcome = "munch"
+        else
+            Game.jonesOutcome = "beaten"
+        end
+    else --???
+        Game.jonesOutcome = "error"
+    end
 end
 return HJones

@@ -7,8 +7,9 @@ function CannonBlast:init(x, y, question)
     super.init(self, x, y, "bullets/blast")
     self:setSpikyCollider();
     self.destroy_on_hit = false;
-    self.quad = quad;
-    self.wrongQuads = question.wrongs;
+    if question then
+        self.wrongQuads = question.wrongs;
+    end
 end
 
 function CannonBlast:update()
@@ -16,22 +17,24 @@ function CannonBlast:update()
     super.update(self)
 end
 function CannonBlast:onCollide(soul)
-    local midpoint = {212 + 108, 71 + 141};
-    local playerLow = soul.y > midpoint[2];
-    local playerRight = soul.x > midpoint[1];
-    local playerQuad = "a";
-    if playerLow and playerRight then
-        playerQuad = "d";
-    elseif playerLow and not playerRight then
-        playerQuad = "c";
-    elseif (not playerLow) and playerRight then
-        playerQuad = "b";
-    end
-    if not TableUtils.contains(self.wrongQuads,playerQuad) then
-        --hey they got hit even though they did the right answer!!!
-        if not Game.battle.enemies[1].scantronWarned then
-            Game.battle.enemies[1].scantronWarned = true;
-            Game.battle.enemies[1].one_turn_text_override = "Homework Jones reminds you to neatly fill in your scantron bubble. Or else!"
+    if self.wrongQuads then
+        local midpoint = {212 + 108, 71 + 141};
+        local playerLow = soul.y > midpoint[2];
+        local playerRight = soul.x > midpoint[1];
+        local playerQuad = "a";
+        if playerLow and playerRight then
+            playerQuad = "d";
+        elseif playerLow and not playerRight then
+            playerQuad = "c";
+        elseif (not playerLow) and playerRight then
+            playerQuad = "b";
+        end
+        if not TableUtils.contains(self.wrongQuads,playerQuad) then
+            --hey they got hit even though they did the right answer!!!
+            if not Game.battle.enemies[1].scantronWarned then
+                Game.battle.enemies[1].scantronWarned = true;
+                Game.battle.enemies[1].one_turn_text_override = "Homework Jones reminds you to neatly fill in your scantron bubble. Or else!"
+            end
         end
     end
 

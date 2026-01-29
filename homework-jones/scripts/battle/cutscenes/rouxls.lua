@@ -70,7 +70,7 @@ return {
         Game.battle.music:play("rouxlskaard");
         local susie = Game.battle.party[2];
         cutscene:setSpeaker("rouxls");
-        cutscene:text("Hi Guyse","neutral");
+        cutscene:text("* Hi Guyse","neutral");
         Game.battle.timer:after(15/30, function()
             Assets.playSound("rudebuster_swing")
             susie.sprite:setAnimation("battle/rude_buster");
@@ -81,7 +81,7 @@ return {
                 Game.battle:addChild(blast);
             end);
         end);
-        cutscene:text("[noskip]Yes, I hath magnanimously decided to[next]","closed");
+        cutscene:text("[noskip]* Yes, I hath magnanimously decided to[next]","closed");
         Game.battle.music:stop();
         Game.battle.timer:approach(1,512,700,function(num)
             rouxls.x = num;
@@ -90,13 +90,13 @@ return {
                 enemy.y = num;
             end,"linear",function() end);
         end);
-        cutscene:text("OKAYE I'M LEAVINGE,","leavinge");
+        cutscene:text("* OKAY I'M'ST LEAVINGE,","leavinge");
         if enemy.chewed < 10 then
             Game.battle.music:play("studysession");
         else 
             Game.battle.music:play("studysession_slow");
         end
-        enemy.dialogue_override = "Thank you,[wait:5] Susie!";
+        enemy.dialogue_override = "Most thanks,[wait:5] Susie!";
         enemy.dialogue_offset = originalOffset;
         return true;
     end

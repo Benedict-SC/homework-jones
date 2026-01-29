@@ -10,7 +10,7 @@ return {
   tilewidth = 40,
   tileheight = 40,
   nextlayerid = 5,
-  nextobjectid = 14,
+  nextobjectid = 16,
   properties = {},
   tilesets = {
     {
@@ -22,8 +22,7 @@ return {
     {
       name = "castle_roundededges",
       firstgid = 41,
-      filename = "../tilesets/castle_roundededges.tsx",
-      exportfilename = "../tilesets/castle_roundededges.lua"
+      filename = "../tilesets/castle_roundededges.tsx"
     }
   },
   layers = {
@@ -57,53 +56,6 @@ return {
         11, 11, 11, 11, 23, 23, 23, 23, 23, 23, 23, 23, 11, 11, 11, 11,
         11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
         11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11
-      }
-    },
-    {
-      type = "objectgroup",
-      draworder = "topdown",
-      id = 4,
-      name = "objects",
-      class = "",
-      visible = true,
-      opacity = 1,
-      offsetx = 0,
-      offsety = 0,
-      parallaxx = 1,
-      parallaxy = 1,
-      properties = {},
-      objects = {
-        {
-          id = 11,
-          name = "script",
-          type = "",
-          shape = "rectangle",
-          x = 311.225,
-          y = 182.759,
-          width = 214.111,
-          height = 207.229,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["cutscene"] = "landing.go"
-          }
-        },
-        {
-          id = 13,
-          name = "enemy",
-          type = "",
-          shape = "rectangle",
-          x = 825.394,
-          y = 74.409,
-          width = 40,
-          height = 40,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["actor"] = "homework",
-            ["encounter"] = "hjones"
-          }
-        }
       }
     },
     {
@@ -141,8 +93,69 @@ return {
     {
       type = "objectgroup",
       draworder = "topdown",
+      id = 4,
+      name = "objects",
+      class = "",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 11,
+          name = "script",
+          type = "",
+          shape = "rectangle",
+          x = 311.225,
+          y = 182.759,
+          width = 214.111,
+          height = 207.229,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["cutscene"] = "landing.go"
+          }
+        },
+        {
+          id = 14,
+          name = "npc",
+          type = "",
+          shape = "point",
+          x = 308.966,
+          y = -38.7175,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["actor"] = "ralsei"
+          }
+        },
+        {
+          id = 15,
+          name = "npc",
+          type = "",
+          shape = "point",
+          x = 849.462,
+          y = 187.393,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["actor"] = "homework"
+          }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
       id = 3,
-      name = "Collision",
+      name = "collision",
       class = "",
       visible = true,
       opacity = 1,

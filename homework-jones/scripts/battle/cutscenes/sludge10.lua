@@ -11,7 +11,7 @@ return {
         cutscene:battlerText(enemy,"There's no way I'll ever be\nuseful to you kids in your\nentire lives,[wait:5] but at least you\nwon't pass out all the time with\na few extra bites to eat!");
         cutscene:battlerText(enemy,"If you can't learn crap\nfrom Homework Jones, then\nsup upon my [shake:1]HOMEWORK BONES![shake:0]");
         cutscene:setSpeaker("susie")
-        cutscene:text("(Kris he's making it weird.)","shy_b");
+        cutscene:text("* (Kris he's making it weird.)","shy_b");
         enemy.dialogue_override = "KEH HEH HUH";
     end
 }

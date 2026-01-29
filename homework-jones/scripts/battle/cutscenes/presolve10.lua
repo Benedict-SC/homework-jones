@@ -10,7 +10,7 @@ return {
         enemy.sprite:setAnimation("idle");
         cutscene:battlerText(enemy,"Susie...");
         cutscene:setSpeaker("susie");
-        cutscene:text("...Yeah?","surprise");
+        cutscene:text("* ...Yeah?","surprise");
         enemy.sprite:setAnimation("patient");
         cutscene:battlerText(enemy,"I'll be back soon!");
         enemy.sprite:setAnimation("spinny");
@@ -23,8 +23,8 @@ return {
         enemy.sprite:setAnimation("patient");
         cutscene:battlerText(enemy,"I'll definitely be able\nto teach you what\nyour project's about!");
         enemy.sprite:setAnimation("idle");
-        cutscene:text("Uh, sure, dude. Good luck.","smile");
-        cutscene:text("(...guess I've had WORSE teachers.)","nervous_side");
+        cutscene:text("* Uh,[wait:3] sure,[wait:3] dude.[wait:5] Good luck.","smile");
+        cutscene:text("* (...guess I've had WORSE teachers.)","nervous_side");
         enemy.mercy = 100;
         enemy.dialogue_override = "Sign me off,[wait:5] Kris!";
     end
