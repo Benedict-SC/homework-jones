@@ -2,7 +2,8 @@ local Favorite, super = Class(Wave)
 
 function Favorite:onStart()
     self.time = 10;
-    self.jones = self:getAttackers()[1];
+    self.jones = Game.battle.enemies[1];
+    if not self.jones then error("where is my favorite jones???") end
     self.input = {""}
     self:setArenaSize(30,30);
     --self:setSoulPosition(SCREEN_WIDTH / 2,250);
@@ -352,7 +353,7 @@ function Favorite:onEnd()
    self.instructionText:remove();
    self.timerFrame:remove();
    self.timerExpended:remove();
-   Game.battle:startCutscene("favoritefriend", "favoriteFriend",self:getAttackers()[1],dialogue);
+   Game.battle:startCutscene("favoritefriend", "favoriteFriend",self.jones,dialogue);
 end
 
 return Favorite

@@ -26,11 +26,12 @@ function HJones:init()
     self.waves = {
         --"basic"
         --"favorite",
-        "mathblaster",
         "multiplechoice",
+        "mathblaster",
         --"solow",
         --"mewmew"
     }
+    self.normalWaveIndex = 1;
 
     self.dialogue = {
         "Kya ha ha![wait:5] Solve my\npuzzles and problems!"
@@ -129,8 +130,6 @@ function HJones:init()
     self:registerAct("EatHW")
     self:registerAct("EatHWX","",{"susie"})
 
-    --DEBUG: REMOVE
-    --self.mercy = 100;
 end
 function HJones:update()
     local freestate = Game.battle.state == "MENUSELECT" or Game.battle.state == "ENEMYSELECT" or Game.battle.state == "PARTYSELECT" or Game.battle.state == "ACTIONSELECT"
@@ -197,6 +196,20 @@ function HJones:onAct(battler, name)
     -- If the act is none of the above, run the base onAct function
     -- (this handles the Check act)
     return super.onAct(self, battler, name)
+end
+function HJones:selectWave()
+    local waves = self:getNextWaves()
+    if #waves > 1 then
+        local wave = waves[self.normalWaveIndex];
+        self.normalWaveIndex = self.normalWaveIndex + 1;
+        if self.normalWaveIndex > #self.waves then
+            self.normalWaveIndex = 1;
+        end
+        self.selected_wave = wave
+        return wave
+    else
+        return waves[1];
+    end
 end
 function HJones:beforeBasicWave(cutscene)
     local fought = self.lastTurnHurt;

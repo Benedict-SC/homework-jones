@@ -35,7 +35,7 @@ return {
         cutscene:text("* Am I a genius or what?","closed_grin");
         cutscene:setSpeaker("ralsei");
         ralsei:setFacing("up");
-        cutscene:text("* Um, you could certain-\n-ly trust Queen to an-\n-swer... some questions.","blush");
+        cutscene:text("* Um, you could certainly\ntrust Queen to answer\n...some questions.","blush");
         ralsei:setFacing("right");
         cutscene:text("* And none of the Darkners in Castle Town would mind helping you.","blush_smile");
         ralsei:setFacing("down");
