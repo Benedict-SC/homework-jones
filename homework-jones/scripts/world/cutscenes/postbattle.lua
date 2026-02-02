@@ -80,5 +80,7 @@ return {
             cutscene:text("* Let's go,[wait:3] Kris.","neutral_side")
             cutscene:text("* (...don't rely on me for plans,[wait:4] I guess.)","bangs_neutral")
         end
+        cutscene:wait(3);
+        love.event.quit();
     end
 }

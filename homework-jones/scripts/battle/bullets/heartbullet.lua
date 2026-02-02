@@ -7,7 +7,7 @@ local HeartBullet, super = Class(Bullet)
 function HeartBullet:init(x, y, dir, speed)
     -- Last argument = sprite path
     super.init(self, x, y, "bullets/heart")
-
+    self.damage = 9
     -- Move the bullet in dir radians (0 = right, pi = left, clockwise rotation)
     self.physics.direction = dir
     -- Speed the bullet moves (pixels per frame at 30FPS)

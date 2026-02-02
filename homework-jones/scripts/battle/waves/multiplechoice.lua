@@ -90,7 +90,7 @@ function MultipleChoice:init()
 end
 function MultipleChoice:illegibilize(text)
     local percent = 0;
-    local chewed = self:getAttackers()[1].chewed;
+    local chewed = Game.battle.enemies[1].chewed;
     local shake = 0;
     if chewed <= 2 then
         percent = 0;
@@ -126,7 +126,7 @@ function MultipleChoice:onStart()
     self.time = 10;
     self.readtime = 6;
     self.UI_DISPLACE = 110;
-    local attacker = self:getAttackers()[1];
+    local attacker = Game.battle.enemies[1];
     self.jones = attacker;
     attacker.current_target = "ALL";
     if attacker.multIndex > #MultipleChoice.questions then
@@ -378,7 +378,7 @@ function MultipleChoice:cleanupStep()
         self.questionText:remove();
         self.timer:approach(0.7,self.UI_DISPLACE,0,function(num)
             Game.battle.battle_ui.y = self.ui_save + num;
-            self:getAttackers()[1].x = self.jones_save + (2*num);
+            Game.battle.enemies[1].x = self.jones_save + (2*num);
         end,"out-cubic");
         self.timer:after(0.705,function() 
             self.moving = false;
@@ -392,7 +392,7 @@ end
 
 function MultipleChoice:onEnd()
     Game.battle.battle_ui.y = self.ui_save;
-    self:getAttackers()[1].x = self.jones_save;
+    Game.battle.enemies[1].x = self.jones_save;
     self.bg:remove();
     self.boat:remove();
 end

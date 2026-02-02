@@ -1,7 +1,7 @@
 local MathBlaster, super = Class(Wave)
 
 function MathBlaster:onStart()
-    self.jones = self:getAttackers()[1];
+    self.jones = Game.battle.enemies[1];
     self.time = 14;
     self.bulletspeed = 5;
     local equations = {

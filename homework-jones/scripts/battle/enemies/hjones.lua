@@ -28,6 +28,7 @@ function HJones:init()
         --"favorite",
         "multiplechoice",
         "mathblaster",
+        "geography",
         --"solow",
         --"mewmew"
     }
@@ -114,6 +115,7 @@ function HJones:init()
     self.chewed = 0;
     self.multIndex = 1;
     self.mathIndex = 1;
+    self.geographiesSeen = 0;
     self.wordProblemsGiven = 0;
     self.solveForXPicked = false;
     self.soggySolvePicked = false;
@@ -208,7 +210,9 @@ function HJones:selectWave()
         self.selected_wave = wave
         return wave
     else
-        return waves[1];
+        local wave = waves[1];
+        self.selected_wave = wave;
+        return wave;
     end
 end
 function HJones:beforeBasicWave(cutscene)

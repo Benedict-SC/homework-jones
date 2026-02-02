@@ -4,7 +4,7 @@ function MewMew:onStart()
     if self.didthisalready then error("???? how") end
     self.didthisalready = true;
     self.time = 5;
-    self.jones = self:getAttackers()[1];
+    self.jones = Game.battle.enemies[1];
     self.testprog = 1;
     self.input = {""}
     self:setArenaSize(30,30);

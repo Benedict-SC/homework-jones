@@ -3,7 +3,7 @@ local Solow, super = Class(Wave)
 function Solow:onStart()
     self.solowState = "START";
     self.time = 10;
-    self.jones = self:getAttackers()[1];
+    self.jones = Game.battle.enemies[1];
     self.input = {""}
     self.questionText = Text("Essay question 2:",200,50,250,nil,{align="center"});
     Game.battle:addChild(self.questionText);
